@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Bounce To Left */
+.hvr-bounce-to-left {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.hvr-bounce-to-left:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #e3c800;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-bounce-to-left:hover,
+.hvr-bounce-to-left:focus,
+.hvr-bounce-to-left:active {
+  color: white;
+}
+.hvr-bounce-to-left:hover:before,
+.hvr-bounce-to-left:focus:before,
+.hvr-bounce-to-left:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
+/* Shared */
+.signInBtn {
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0 0.5rem;
+  padding: 0 15px 0 35px;
+  border: none;
+  text-align: left;
+  line-height: 34px;
+  white-space: nowrap;
+  font-size: 16px;
+  color: #fff;
+}
+.signInBtn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
+}
+.signInBtn:focus {
+  outline: none;
+}
+.signInBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Facebook */
+.facebook {
+  background-color: #4c69ba;
+  background-image: linear-gradient(#4c69ba, #3b55a0);
+  text-shadow: 0 -1px 0 #354c8c;
+}
+.facebook:before {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png")
+    6px 6px no-repeat;
+}
+.facebook:hover,
+.facebook:focus {
+  background-color: #5b7bd5;
+  background-image: linear-gradient(#5b7bd5, #4864b1);
+}
+
+/* Google */
+.google {
+  background: #dd4b39;
+}
+.google:before {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png")
+    6px 6px no-repeat;
+}
+.google:hover,
+.google:focus {
+  background: #e74b37;
+}
+
