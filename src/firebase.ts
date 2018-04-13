@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 
-interface Config {
+interface ConfigInterface {
   apiKey: string;
   authDomain: string;
   databaseURL: string;
@@ -16,7 +16,7 @@ const config = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID
-} as Config;
+} as ConfigInterface;
 
 firebase.initializeApp(config);
 

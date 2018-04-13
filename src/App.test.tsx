@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './enzymeAdapter';
 import { shallow } from 'enzyme';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import App from './App';
 
@@ -12,9 +13,9 @@ it('renders without crashing', () => {
 });
 
 describe('Testing <App />', () => {
-  it('renders the <BrowserRouter> as the first element', () => {
+  it('renders the <Provider> as the first element', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.type()).toEqual(BrowserRouter);
+    expect(wrapper.type()).toEqual(Provider);
   });
   it('renders the <Switch /> correctly', () => {
     const wrapper = shallow(<App />);

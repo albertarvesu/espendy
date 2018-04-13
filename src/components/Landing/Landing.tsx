@@ -1,22 +1,23 @@
 import * as React from 'react';
-import * as firebase from 'firebase';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-import './Landing.css';
+import { LandingTitle, LandingSubtitle } from './../Styled/LandingText';
 
 import { auth } from './../../firebase';
+import { signIn, SignInInterface } from './../../actions/auth';
 
-interface SignIn {
-  (provider: firebase.auth.AuthProvider, redirect: string): void;
-}
+import './Landing.css';
 
 interface Props {
   hasError: boolean;
   error?: string;
   isLoggingIn?: boolean;
-  signIn: SignIn;
+  signIn: SignInInterface;
 }
 
-class Landing extends React.Component<Props> {
+export class Landing extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this.onFacebooksignIn = this.onFacebooksignIn.bind(this);
@@ -36,11 +37,11 @@ class Landing extends React.Component<Props> {
       <div className="auth">
         <div className="wrapper">
           <div className="header">
-            <h2>eSpendy</h2>
-            <h5>Manage your expenses wisely.</h5>
+            <LandingTitle>eSpendy</LandingTitle>
+            <LandingSubtitle>Manage your expenses wisely.</LandingSubtitle>
           </div>
           {this.props.hasError && <p className="error">{this.props.error}</p>}
-          <div>
+          <div className="button-wrap">
             <button
               disabled={this.props.isLoggingIn}
               className="signInBtn facebook"
@@ -62,4 +63,9 @@ class Landing extends React.Component<Props> {
   }
 }
 
-export default Landing;
+export default compose(
+  withRouter,
+  connect(null, {
+    signIn
+  })
+)(Landing);

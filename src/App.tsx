@@ -1,20 +1,27 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import configureStore from './store/configureStore';
 
 import Landing from './components/Landing/Landing';
 
 import './App.css';
 
+const { store } = configureStore();
+
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-      <div>
-        <Switch>
-          <Route exact={true} path="/" component={Landing} />
-        </Switch>
-      </div>
-    </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div>
+            <Switch>
+              <Route exact={true} path="/" component={Landing} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }

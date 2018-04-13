@@ -1,8 +1,8 @@
 import * as React from 'react';
 import './../../enzymeAdapter';
 import { shallow } from 'enzyme';
-
-import Landing from './Landing';
+import { LandingTitle, LandingSubtitle } from './../Styled/LandingText';
+import { Landing } from './Landing';
 
 describe('Testing <Landing />', () => {
   it('renders the skeletons of landing element', () => {
@@ -24,5 +24,11 @@ describe('Testing <Landing />', () => {
     // tslint:disable-next-line:no-empty
     const wrapper = shallow(<Landing hasError={true} error="This is an error message" signIn={() => {}}  />);
     expect(wrapper.find('.error').text()).toEqual('This is an error message');
+  });
+  it('renders correct styled texts', () => {
+    // tslint:disable-next-line:no-empty
+    const wrapper = shallow(<Landing hasError={false} signIn={() => {}}  />);
+    expect(wrapper.find(LandingTitle).length).toEqual(1);
+    expect(wrapper.find(LandingSubtitle).length).toEqual(1);
   });
 });
