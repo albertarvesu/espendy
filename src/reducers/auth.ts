@@ -10,13 +10,13 @@ import {
   SIGNOUT_SUCCESS
 } from './../constants/actionTypes';
 
-const initialAuthState = {
+const initialAuthState: AuthStateInterface = {
   isLoggingIn: false,
   isLoggedIn: false,
   hasError: false,
   error: '',
   accessToken: ''
-} as AuthStateInterface;
+};
 
 export const auth = (state: AuthStateInterface = initialAuthState, action: AppActionInterface): AuthStateInterface => {
   switch (action.type) {
@@ -38,7 +38,7 @@ export const auth = (state: AuthStateInterface = initialAuthState, action: AppAc
         isLoggedIn: false,
         isLoggingIn: false,
         hasError: true,
-        error: get(action, 'payload.data'),
+        error: get(action, 'payload'),
       };
 
     case SIGNOUT_SUCCESS:

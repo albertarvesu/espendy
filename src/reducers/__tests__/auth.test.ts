@@ -55,9 +55,7 @@ describe('Testing Reducer Auth', () => {
   });
 
   it('switch to isLoggingIn = false, isLoggedIn = false, hasError = true upon SIGNIN_FAILURE', () => {
-    const payload = {
-      data: 'Error',
-    };
+    const payload = 'Error';
     const expected = {
       isLoggingIn: false,
       isLoggedIn: false,

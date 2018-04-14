@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 
 import Landing from './components/Landing/Landing';
+import Home from './components/Home/Home';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ class App extends React.Component {
           <div>
             <Switch>
               <Route exact={true} path="/" component={Landing} />
+              <Route path="/home" component={Home} />
             </Switch>
           </div>
         </BrowserRouter>

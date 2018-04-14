@@ -23,6 +23,6 @@ describe('Testing <App />', () => {
   });
   it('renders only one <Route />', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.find(Route).length).toEqual(1);
+    expect(wrapper.find(Route).length).toEqual(2);
   });
 });

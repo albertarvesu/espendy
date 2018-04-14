@@ -6,9 +6,16 @@ import { compose } from 'redux';
 import { LandingTitle, LandingSubtitle } from './../Styled/LandingText';
 
 import { auth } from './../../firebase';
+import {
+  selectIsLoggedIn,
+  selectIsLoggingIn,
+  selectError,
+  selectHasError
+} from './../../selectors/auth';
 import { signIn, SignInInterface } from './../../actions/auth';
 
 import './Landing.css';
+import { AppStateInterface, AuthStateInterface } from '../../reducers';
 
 interface Props {
   hasError: boolean;
@@ -63,9 +70,16 @@ export class Landing extends React.Component<Props> {
   }
 }
 
+const mapStateToProps = (state: AppStateInterface) => ({
+  isLoggingIn: selectIsLoggingIn(state),
+  isLoggedIn: selectIsLoggedIn(state),
+  hasError: selectHasError(state),
+  error: selectError(state)
+} as AuthStateInterface);
+
 export default compose(
   withRouter,
-  connect(null, {
+  connect(mapStateToProps, {
     signIn
   })
 )(Landing);

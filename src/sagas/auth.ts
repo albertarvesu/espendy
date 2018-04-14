@@ -1,9 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as ACTION_TYPES from '../constants/actionTypes';
+import * as API from '../api/user';
 import { get } from 'lodash';
 
 import { AppActionInterface } from './../actions';
 import { auth } from '../firebase';
+import { UserInterface } from '../reducers';
 
 const firebaseAuth = auth();
 
@@ -11,19 +13,24 @@ export function* signIn(action: AppActionInterface) {
   try {
     const authData = yield call([firebaseAuth, firebaseAuth.signInWithPopup], get(action, 'payload.provider'));
 
-    if (get(authData, 'additionalUserInfo.profile')) {
-      yield put(
-        {
-          type: ACTION_TYPES.SIGNIN_SUCCESS,
-          payload: {
-            profile: authData.additionalUserInfo.profile,
-            credential: authData.credential
-          }
-        } as AppActionInterface
-      );
+    if (authData.additionalUserInfo && authData.user) {
+      const userData: UserInterface = {
+        uid: get(authData, 'user.uid'),
+        email: get(authData, 'user.email'),
+        displayName: get(authData, 'user.displayName'),
+        photoURL: get(authData, 'user.photoURL'),
+        providerId: get(authData, 'additionalUserInfo.providerId'),
+        creationTime: get(authData, 'user.metadata.creationTime'),
+        lastSignInTime: get(authData, 'user.metadata.lastSignInTime'),
+      };
 
-      const { redirect, history } = action.payload;
-      history.push(redirect);
+      yield call(API.setUser, userData);
+
+      yield put({ type: ACTION_TYPES.SIGNIN_SUCCESS, payload: userData } as AppActionInterface);
+
+      if (get(action, 'payload.redirect')) {
+        // yield put(push(action.payload.redirect));
+      }
     } else {
       yield put({ type: ACTION_TYPES.SIGNIN_FAILURE, payload: authData } as AppActionInterface);
     }
