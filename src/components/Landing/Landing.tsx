@@ -22,6 +22,7 @@ interface Props {
   error?: string;
   isLoggingIn?: boolean;
   signIn: SignInInterface;
+  history?: any;
 }
 
 export class Landing extends React.Component<Props> {
@@ -32,11 +33,11 @@ export class Landing extends React.Component<Props> {
   }
 
   onFacebooksignIn() {
-    this.props.signIn(new auth.FacebookAuthProvider(), '/home');
+    this.props.signIn(new auth.FacebookAuthProvider(), '/home', this.props.history);
   }
 
   onGooglesignIn() {
-    this.props.signIn(new auth.GoogleAuthProvider(), '/home');
+    this.props.signIn(new auth.GoogleAuthProvider(), '/home', this.props.history);
   }
 
   render () {

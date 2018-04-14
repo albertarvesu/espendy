@@ -28,8 +28,9 @@ export function* signIn(action: AppActionInterface) {
 
       yield put({ type: ACTION_TYPES.SIGNIN_SUCCESS, payload: userData } as AppActionInterface);
 
-      if (get(action, 'payload.redirect')) {
-        // yield put(push(action.payload.redirect));
+      const { history, redirect } = action.payload;
+      if (history && redirect) {
+        history.push(redirect);
       }
     } else {
       yield put({ type: ACTION_TYPES.SIGNIN_FAILURE, payload: authData } as AppActionInterface);
@@ -47,8 +48,9 @@ export function* signOut(action: AppActionInterface) {
   try {
     yield call([firebaseAuth, firebaseAuth.signOut]);
     yield put({ type: ACTION_TYPES.SIGNOUT_SUCCESS } as AppActionInterface);
-    const { redirect, history } = action.payload;
-    history.push(redirect);
+    // if (get(action, 'payload.redirect')) {
+    //   history.push(action.payload.redirect);
+    // }
   } catch (error) {
     yield put({ type: ACTION_TYPES.SIGNOUT_FAILURE } as AppActionInterface);
   }

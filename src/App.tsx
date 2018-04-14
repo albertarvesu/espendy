@@ -18,8 +18,8 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <Switch>
-              <Route exact={true} path="/" component={Landing} />
               <Route path="/home" component={Home} />
+              <Route exact={true} path="/" component={Landing} />
             </Switch>
           </div>
         </BrowserRouter>
