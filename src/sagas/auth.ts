@@ -48,9 +48,6 @@ export function* signOut(action: AppActionInterface) {
   try {
     yield call([firebaseAuth, firebaseAuth.signOut]);
     yield put({ type: ACTION_TYPES.SIGNOUT_SUCCESS } as AppActionInterface);
-    // if (get(action, 'payload.redirect')) {
-    //   history.push(action.payload.redirect);
-    // }
   } catch (error) {
     yield put({ type: ACTION_TYPES.SIGNOUT_FAILURE } as AppActionInterface);
   }

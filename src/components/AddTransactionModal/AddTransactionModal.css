@@ -1,0 +1,114 @@
+/* Modal Content */
+
+.modal-container {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+
+  position: relative;
+}
+
+select {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  width: 19.6rem;
+  height: 45px;
+  font-size: 1rem;
+}
+
+.modal-content.settings {
+  background-color: #e51400;
+}
+
+.modal-content.add-new {
+  background-color: #fa6800;
+}
+
+.modal-content .close-button {
+  position: absolute;
+  font-size: 1.5rem;
+  top: 0.325rem;
+  right: 1rem;
+}
+
+.modal-content h4 {
+  margin: 1.125rem 0 0.75rem 0.125rem;
+}
+
+.modal-content .select-currency {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content .modal-input {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  width: 18rem;
+  height: 30px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #aaa;
+}
+
+.modal-content .modal-input-textarea {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  width: 18.2rem;
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #aaa;
+}
+
+.button {
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+  line-height: 30px;
+  height: 42px;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  outline: none;
+}
+
+.modal-content .button {
+  width: 12rem;
+  margin-top: 1rem;
+}
+
+.modal-content .primary {
+  outline-color: #89b0ff;
+  background-color: #0050ef;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-content .actions {
+  width: 100%;
+}
+
+.select-currency input {
+  font-weight: bold;
+  border-radius: 0px;
+  width: 17rem;
+  color: rgba(0, 0, 0, 0.8);
+}

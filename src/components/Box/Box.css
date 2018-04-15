@@ -1,0 +1,56 @@
+.box {
+  min-height: 20vh;
+  padding: 1rem;
+}
+
+.box .lead {
+  text-align: center;
+}
+
+.box .lead h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.box .icon {
+  height: 5rem;
+}
+
+/* columned box */
+
+.box-lr {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  grid-gap: 0.5rem;
+}
+
+.box-lr .label {
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+}
+
+.box-lr .label h5 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* columned box */
+
+/* row box */
+
+.box-td {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.box-td .summary {
+  font-size: 0.925rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* row box */

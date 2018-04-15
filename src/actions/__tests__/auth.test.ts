@@ -22,7 +22,7 @@ it('signIn with Google', () => {
 });
 
 it('signOut', () => {
-  const data = { redirect: '/' };
+  const data = { redirect: '/', history };
   const expected = { type: ACTION_TYPES.SIGNOUT, payload: data };
   const actual = signOut(data.redirect, history);
   expect(actual).toEqual(expected);
