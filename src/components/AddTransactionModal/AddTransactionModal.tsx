@@ -1,9 +1,15 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import * as moment from 'moment';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
 import EXPENSE_TYPES from './../../constants/expenseTypes';
 import INCOME_TYPES from './../../constants/incomeTypes';
+
+import { TransactionInterface } from './../../reducers';
+import { createTransaction, CreateTransactionInterface } from './../../actions/transactions';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './AddTransactionModal.css';
@@ -25,7 +31,8 @@ export const CategoryTypes = ({ className, types, onChange }: CategoryProps) => 
 );
 
 interface ModalProps {
-
+  createTransaction: CreateTransactionInterface;
+  history?: any;
 }
 
 interface ModalState {
@@ -36,7 +43,7 @@ interface ModalState {
   remarks: string;
 }
 
-class AddTransactionModal extends React.Component<ModalProps, ModalState> {
+export class AddTransactionModal extends React.Component<ModalProps, ModalState> {
   constructor(props: ModalProps) {
     super(props);
     this.state = {
@@ -79,7 +86,14 @@ class AddTransactionModal extends React.Component<ModalProps, ModalState> {
   }
 
   onSaveTransaction() {
-    console.warn(this.state);
+    const transaction: TransactionInterface = {
+      type: this.state.type,
+      category: this.state.category,
+      date: this.state.date.toISOString(),
+      amount: this.state.amount,
+      remarks: this.state.remarks,
+    };
+    this.props.createTransaction(transaction, '/home', this.props.history);
   }
 
   render() {
@@ -139,4 +153,9 @@ class AddTransactionModal extends React.Component<ModalProps, ModalState> {
   }
 }
 
-export default AddTransactionModal;
+export default compose(
+  withRouter,
+  connect(null, {
+    createTransaction
+  })
+)(AddTransactionModal);

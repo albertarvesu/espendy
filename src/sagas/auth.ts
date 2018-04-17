@@ -26,6 +26,8 @@ export function* signIn(action: AppActionInterface) {
 
       yield call(API.setUser, userData);
 
+      yield put({ type: ACTION_TYPES.AUTH_SUCCESS, payload: get(authData, 'credential.accessToken') });
+
       yield put({ type: ACTION_TYPES.SIGNIN_SUCCESS, payload: userData } as AppActionInterface);
 
       const { history, redirect } = action.payload;

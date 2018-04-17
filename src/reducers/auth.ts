@@ -5,7 +5,7 @@ import { AppActionInterface } from './../actions';
 
 import {
   SIGNIN,
-  SIGNIN_SUCCESS,
+  AUTH_SUCCESS,
   SIGNIN_FAILURE,
   SIGNOUT_SUCCESS
 } from './../constants/actionTypes';
@@ -23,12 +23,12 @@ export const auth = (state: AuthStateInterface = initialAuthState, action: AppAc
     case SIGNIN:
       return { ...state, isLoggingIn: true, isLoggedIn: false, hasError: false };
 
-    case SIGNIN_SUCCESS: {
+    case AUTH_SUCCESS: {
       return {
         ...state,
         isLoggedIn: true,
         isLoggingIn: false,
-        accessToken: get(action, 'payload.credential.accessToken'),
+        accessToken: get(action, 'payload'),
       };
     }
 
