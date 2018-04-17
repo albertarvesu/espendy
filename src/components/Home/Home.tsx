@@ -26,6 +26,7 @@ interface HomeProps {
 export class Home extends React.Component<HomeProps> {
   componentDidMount() {
     document.body.classList.remove('landing');
+    this.props.getTransactions(this.props.currentUser);
   }
 
   componentWillReceiveProps(nextProps: HomeProps) {
