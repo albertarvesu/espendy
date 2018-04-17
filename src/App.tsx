@@ -7,6 +7,7 @@ import configureStore from './store/configureStore';
 
 import Landing from './components/Landing/Landing';
 import Home from './components/Home/Home';
+import SignOut from './components/SignOut/SignOut';
 import AddTransactionModal from './components/AddTransactionModal/AddTransactionModal';
 
 import 'react-router-modal/css/react-router-modal.css';
@@ -32,8 +33,9 @@ class App extends React.Component {
             />
             <ModalContainer containerClassName="modal-container" />
             <Switch>
-              <Route path="/home" component={Home} />
               <Route exact={true} path="/" component={Landing} />
+              <Route path="/home" component={Home} />
+              <Route path="/signout" component={SignOut} />
             </Switch>
           </div>
         </BrowserRouter>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { isEmpty } from 'lodash';
@@ -14,6 +14,8 @@ import { selectCurrentUser } from './../../selectors/user';
 import { selectCurrentBalance } from './../../selectors/transactions';
 
 import './Home.css';
+
+const SignoutIcon = require('./../../images/power-button.svg');
 
 interface HomeProps {
   currentUser: UserInterface;
@@ -50,6 +52,18 @@ export class Home extends React.Component<HomeProps> {
             >
               <AddTransaction />
             </Box>
+
+            <Link
+              className="box box-td tile-link sign-out hvr-bounce-to-left"
+              to="/signout"
+            >
+              <div className="lead">
+                <img alt="Signout" className="icon" src={SignoutIcon} />
+              </div>
+              <div className="summary">
+                <p>Sign Out</p>
+              </div>
+            </Link>
 
           </div>
         </div>

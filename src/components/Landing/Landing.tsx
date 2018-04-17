@@ -32,6 +32,10 @@ export class Landing extends React.Component<Props> {
     this.onGooglesignIn = this.onGooglesignIn.bind(this);
   }
 
+  componentDidMount() {
+    document.body.classList.add('landing');
+  }
+
   onFacebooksignIn() {
     this.props.signIn(new auth.FacebookAuthProvider(), '/home', this.props.history);
   }

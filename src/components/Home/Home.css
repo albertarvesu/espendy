@@ -41,6 +41,10 @@
   background-color: #fa6800;
 }
 
+.sign-out {
+  background-color: #647687;
+}
+
 @media only screen and (max-width: 700px) {
   .container {
     width: calc(100% - 6rem);

@@ -16,12 +16,13 @@ import './AddTransactionModal.css';
 
 interface CategoryProps {
   className?: string;
+  autoFocus?: boolean;
   types: object;
   onChange: any;
 }
 
-export const CategoryTypes = ({ className, types, onChange }: CategoryProps) => (
-  <select className={className} onChange={onChange}>
+export const CategoryTypes = ({ className, autoFocus, types, onChange }: CategoryProps) => (
+  <select autoFocus={autoFocus} className={className} onChange={onChange}>
     {Object.keys(types).map(key => (
       <option value={key} key={key}>
         {types[key]}
@@ -39,7 +40,7 @@ interface ModalState {
   type: string;
   date: moment.Moment;
   category: string;
-  amount: number;
+  amount: string;
   remarks: string;
 }
 
@@ -50,7 +51,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
       type: 'expenses',
       date: moment(),
       category: Object.keys(EXPENSE_TYPES)[0],
-      amount: 0,
+      amount: '',
       remarks: ''
     };
     this.onChangeType = this.onChangeType.bind(this);
@@ -78,7 +79,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
   }
 
   onChangeAmount(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ amount: parseFloat(event.target.value) });
+    this.setState({ amount: event.target.value });
   }
 
   onChangeRemarks(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -90,7 +91,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
       type: this.state.type,
       category: this.state.category,
       date: this.state.date.toISOString(),
-      amount: this.state.amount,
+      amount: parseFloat(this.state.amount),
       remarks: this.state.remarks,
     };
     this.props.createTransaction(transaction, '/home', this.props.history);
@@ -110,6 +111,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         <h4>Category</h4>
         {this.state.type === 'expenses' && (
           <CategoryTypes
+            autoFocus={true}
             className="expense-types"
             types={EXPENSE_TYPES}
             onChange={this.onChangeCategory}
@@ -117,6 +119,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         )}
         {this.state.type === 'income' && (
           <CategoryTypes
+            autoFocus={false}
             className="income-types"
             types={INCOME_TYPES}
             onChange={this.onChangeCategory}
