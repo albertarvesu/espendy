@@ -126,6 +126,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         <DatePicker
           dateFormat="MMM DD, YYYY"
           selected={this.state.date}
+          maxDate={moment()}
           className="modal-input"
           onChange={this.onChangeDate}
         />
