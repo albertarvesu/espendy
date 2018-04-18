@@ -11,7 +11,7 @@ import './Transactions.css';
 
 const Clipboards = require('./../../images/clipboards.svg');
 
-const MAX_DISPLAY = 7;
+const MAX_DISPLAY = 9;
 
 interface TransactionsProps {
   transactions: Array<TransactionInterface>;

@@ -38,6 +38,8 @@ interface ModalProps {
 }
 
 interface ModalState {
+  hasError: boolean;
+  errorMessage: string;
   type: string;
   date: moment.Moment;
   category: string;
@@ -49,6 +51,8 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
   constructor(props: ModalProps) {
     super(props);
     this.state = {
+      hasError: false,
+      errorMessage: '',
       type: 'expenses',
       date: moment(),
       category: Object.keys(EXPENSE_TYPES)[0],
@@ -88,6 +92,14 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
   }
 
   onSaveTransaction() {
+    if (!this.state.amount) {
+      this.setState({
+        hasError: true,
+        errorMessage: 'Amount is a required field.'
+      });
+      return;
+    }
+
     const key = db.ref().child('transactions').push().key;
     const transaction: TransactionInterface = {
       id: key || undefined,
@@ -106,6 +118,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         <Link to="/home" className="close-button">
           x
         </Link>
+        {this.state.hasError && <div className="error">{this.state.errorMessage}</div>}
         <h4>Type</h4>
         <select onChange={this.onChangeType}>
           <option value="expenses">Expenses</option>
@@ -140,7 +153,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         <h4>Amount</h4>
         <input
           type="number"
-          placeholder="100.00"
+          placeholder="e.g. 100.00"
           className="modal-input"
           value={this.state.amount}
           onChange={this.onChangeAmount}

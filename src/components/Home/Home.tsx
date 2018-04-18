@@ -2,13 +2,14 @@ import * as React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { isEmpty } from 'lodash';
+import { isEmpty, debounce } from 'lodash';
 
 import Box from './../Box/Box';
 import Balance from './../Balance/Balance';
 import AddTransaction from './../AddTransaction/AddTransaction';
 import Transactions from './../Transactions/Transactions';
 import LineChart from './../LineChart/LineChart';
+import PieChart from './../PieChart/PieChart';
 
 import { getTransactions, GetTransactionsInterface } from './../../actions/transactions';
 import { AppStateInterface, UserInterface, TransactionInterface } from '../../reducers';
@@ -16,11 +17,15 @@ import { selectCurrentUser } from './../../selectors/user';
 import {
   selectAllTransactions,
   selectCurrentBalance,
+  selectExpensesTransactions,
+  selectTotalExpenses,
   selectExpensesTransactionsByDate,
   selectIncomeTransactionsByDate,
 } from './../../selectors/transactions';
 
 import './Home.css';
+
+const MAX_DOCUMENT_WIDTH = 700;
 
 const SignoutIcon = require('./../../images/power-button.svg');
 
@@ -29,19 +34,41 @@ interface HomeProps {
   currentBalance: number;
   getTransactions: GetTransactionsInterface;
   transactions: Array<TransactionInterface>;
+  expenses: Array<TransactionInterface>;
+  totalExpenses: number;
   expensesByDate: object;
   incomesByDate: object;
 }
 
 export class Home extends React.Component<HomeProps> {
+  constructor(props: HomeProps) {
+    super(props);
+    this.onScroll = debounce(this.onScroll.bind(this), 10);
+  }
   componentDidMount() {
     document.body.classList.remove('landing');
+    window.addEventListener('scroll', this.onScroll);
     this.props.getTransactions(this.props.currentUser);
   }
 
   componentWillReceiveProps(nextProps: HomeProps) {
     if (this.props.currentUser !== nextProps.currentUser && !isEmpty(nextProps.currentUser)) {
       this.props.getTransactions(nextProps.currentUser);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  onScroll() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      if (document.documentElement.clientWidth > MAX_DOCUMENT_WIDTH) {
+        sidebar.style.marginTop = `${document.documentElement.scrollTop}px`;
+      } else {
+        sidebar.style.marginTop = `0px`;
+      }
     }
   }
   
@@ -74,6 +101,15 @@ export class Home extends React.Component<HomeProps> {
               </Box>
             )}
 
+            {!isEmpty(this.props.expenses) && (
+              <Box clazz="chart pie">
+                <PieChart
+                  totalExpenses={this.props.totalExpenses}
+                  expenses={this.props.expenses}
+                />
+              </Box>
+            )}
+
             {!isEmpty(this.props.transactions) && (
               <Box clazz="transactions tile-link">
                 <Transactions transactions={this.props.transactions} />
@@ -93,7 +129,7 @@ export class Home extends React.Component<HomeProps> {
             </Link>
           </div>
 
-          <div className="sidebar">
+          <div className="sidebar" id="sidebar">
             <div className="profile">
               <img
                 alt={`${currentUser.displayName}`}
@@ -118,6 +154,8 @@ const mapStateToProps = (state: AppStateInterface) => ({
   currentUser: selectCurrentUser(state),
   currentBalance: selectCurrentBalance(state),
   transactions: selectAllTransactions(state),
+  expenses: selectExpensesTransactions(state),
+  totalExpenses: selectTotalExpenses(state),
   expensesByDate: selectExpensesTransactionsByDate(state),
   incomesByDate: selectIncomeTransactionsByDate(state),
 });

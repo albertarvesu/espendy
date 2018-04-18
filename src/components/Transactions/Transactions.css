@@ -45,6 +45,11 @@
   opacity: 0.75;
 }
 
+.transactions .lists td:last-child {
+  width: 10%;
+  text-align: right;
+}
+
 .transactions .footer {
   text-align: center;
 }

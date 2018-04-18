@@ -20,6 +20,8 @@ describe('Testing <Home />', () => {
         getTransactions={() => {}}
         currentBalance={0}
         transactions={[]}
+        expenses={[]}
+        totalExpenses={0}
         expensesByDate={{}}
         incomesByDate={{}}
       />
@@ -46,6 +48,8 @@ describe('Testing <Home />', () => {
         transactions={[
           { amount: 10, type: 'expenses', category: 'egw' } as TransactionInterface
         ]}
+        expenses={[]}
+        totalExpenses={0}
         expensesByDate={{'1': 1}}
         incomesByDate={{'2': 2}}
       />

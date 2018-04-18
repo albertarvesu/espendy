@@ -43,7 +43,7 @@ class LineChart extends React.Component<LineChartProps> {
             style={{
               axis: { stroke: 'white' },
               axisLabel: {
-                fontSize: 8,
+                fontSize: 10,
                 padding: 30,
                 fill: 'white',
                 opacity: 0.8
@@ -63,7 +63,7 @@ class LineChart extends React.Component<LineChartProps> {
             style={{
               axis: { stroke: 'white' },
               axisLabel: {
-                fontSize: 8,
+                fontSize: 10,
                 padding: 42,
                 fill: 'white',
                 opacity: 0.8,

@@ -37,4 +37,12 @@ describe('Testing <AddTransactionModal />', () => {
     wrapper.setState({ remarks: 'remarks' });
     expect(wrapper.find('textarea.modal-input-textarea').props().value).toEqual('remarks');
   });
+  it('renders error when no amount entered', () => {
+    // tslint:disable-next-line:no-empty
+    const wrapper = shallow(<AddTransactionModal createTransaction={() => {}} />);
+    expect(wrapper.find('.error').length).toEqual(0);
+    wrapper.setState({ hasError: true, errorMessage: 'Error' });
+    expect(wrapper.find('.error').length).toEqual(1);
+    expect(wrapper.find('.error').text()).toEqual('Error');
+  });
 });
