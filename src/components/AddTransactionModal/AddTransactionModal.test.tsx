@@ -23,4 +23,18 @@ describe('Testing <AddTransactionModal />', () => {
     wrapper.setState({ type: 'income' });
     expect(wrapper.find(CategoryTypes).props().className).toEqual('income-types');
   });
+  it('renders correct amount', () => {
+    // tslint:disable-next-line:no-empty
+    const wrapper = shallow(<AddTransactionModal createTransaction={() => {}} />);
+    expect(wrapper.find('input.modal-input').props().value).toEqual('');
+    wrapper.setState({ amount: '1000' });
+    expect(wrapper.find('input.modal-input').props().value).toEqual('1000');
+  });
+  it('renders correct remarks', () => {
+    // tslint:disable-next-line:no-empty
+    const wrapper = shallow(<AddTransactionModal createTransaction={() => {}} />);
+    expect(wrapper.find('textarea.modal-input-textarea').props().value).toEqual('');
+    wrapper.setState({ remarks: 'remarks' });
+    expect(wrapper.find('textarea.modal-input-textarea').props().value).toEqual('remarks');
+  });
 });

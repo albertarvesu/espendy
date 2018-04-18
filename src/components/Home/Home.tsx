@@ -8,11 +8,17 @@ import Box from './../Box/Box';
 import Balance from './../Balance/Balance';
 import AddTransaction from './../AddTransaction/AddTransaction';
 import Transactions from './../Transactions/Transactions';
+import LineChart from './../LineChart/LineChart';
 
 import { getTransactions, GetTransactionsInterface } from './../../actions/transactions';
 import { AppStateInterface, UserInterface, TransactionInterface } from '../../reducers';
 import { selectCurrentUser } from './../../selectors/user';
-import { selectAllTransactions, selectCurrentBalance } from './../../selectors/transactions';
+import {
+  selectAllTransactions,
+  selectCurrentBalance,
+  selectExpensesTransactionsByDate,
+  selectIncomeTransactionsByDate,
+} from './../../selectors/transactions';
 
 import './Home.css';
 
@@ -23,6 +29,8 @@ interface HomeProps {
   currentBalance: number;
   getTransactions: GetTransactionsInterface;
   transactions: Array<TransactionInterface>;
+  expensesByDate: object;
+  incomesByDate: object;
 }
 
 export class Home extends React.Component<HomeProps> {
@@ -57,9 +65,20 @@ export class Home extends React.Component<HomeProps> {
               <AddTransaction />
             </Box>
 
-            <Box clazz="transactions tile-link">
-              <Transactions transactions={this.props.transactions} />
-            </Box>
+            {!isEmpty(this.props.expensesByDate) && !isEmpty(this.props.incomesByDate) && (
+              <Box clazz="chart line">
+                <LineChart
+                  expensesByDate={this.props.expensesByDate}
+                  incomesByDate={this.props.incomesByDate}
+                />
+              </Box>
+            )}
+
+            {!isEmpty(this.props.transactions) && (
+              <Box clazz="transactions tile-link">
+                <Transactions transactions={this.props.transactions} />
+              </Box>
+            )}
 
             <Link
               className="box box-td tile-link sign-out hvr-bounce-to-left"
@@ -99,6 +118,8 @@ const mapStateToProps = (state: AppStateInterface) => ({
   currentUser: selectCurrentUser(state),
   currentBalance: selectCurrentBalance(state),
   transactions: selectAllTransactions(state),
+  expensesByDate: selectExpensesTransactionsByDate(state),
+  incomesByDate: selectIncomeTransactionsByDate(state),
 });
 
 export default compose(

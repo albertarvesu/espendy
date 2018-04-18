@@ -37,6 +37,15 @@
   background-color: #e51400;
 }
 
+.chart {
+  background-color: #008a00;
+  grid-column: 1/3;
+}
+
+.chart.pie {
+  background-color: #aa00ff;
+}
+
 .add-new {
   background-color: #fa6800;
 }

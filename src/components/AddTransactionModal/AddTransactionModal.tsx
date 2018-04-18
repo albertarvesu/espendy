@@ -149,6 +149,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         <textarea
           className="modal-input-textarea"
           placeholder="Remarks"
+          value={this.state.remarks}
           onChange={this.onChangeRemarks}
         />
         <div className="actions right">
