@@ -45,6 +45,48 @@
   background-color: #647687;
 }
 
+
+.sidebar {
+  flex: 2;
+  margin-left: 1rem;
+}
+
+.sidebox {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile {
+  background-color: #f0a30a;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.profile h5 {
+  font-weight: 500;
+  text-transform: capitalize;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.profile .text {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile .avatar {
+  max-width: 7rem;
+}
+
+.ads {
+  margin-top: 1rem;
+  background-color: #825a2c;
+  min-height: 30vh;
+}
+
+
 @media only screen and (max-width: 700px) {
   .container {
     width: calc(100% - 6rem);

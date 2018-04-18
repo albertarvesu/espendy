@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import { connect } from 'react-redux';
 import * as Currency from 'react-currency-formatter';
 
 const CurrencyIcon = require('./../../images/currency.svg');

@@ -6,7 +6,9 @@ export const selectTransactions = (state: AppStateInterface) =>
 
 export const selectAllTransactions = (state: AppStateInterface): Array<TransactionInterface> => {
   const transactions = get(selectTransactions(state), 'data', []);
-  return Object.keys(transactions).map(key => transactions[key]);
+  return Object.keys(transactions).map(key => transactions[key])
+        .concat()
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };
 
 export const selectExpensesTransactions = (state: AppStateInterface): Array<TransactionInterface> => {

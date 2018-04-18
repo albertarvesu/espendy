@@ -5,7 +5,7 @@ import * as cx from 'classnames';
 import './Box.css';
 
 interface BoxProps {
-  type: string;
+  type?: string;
   clazz: string;
   title?: string;
   path?: string;

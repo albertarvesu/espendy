@@ -13,13 +13,15 @@ describe('Testing <Home />', () => {
       email: '',
       displayName: '',
     };
-    // tslint:disable-next-line:no-empty
-    const wrapper = shallow(<Home currentUser={currentUser} getTransactions={() => {}} currentBalance={0} />);
+    const wrapper = shallow(
+      // tslint:disable-next-line:no-empty
+      <Home currentUser={currentUser} getTransactions={() => {}} transactions={[]}  currentBalance={0} />
+    );
     expect(wrapper.type()).toEqual('div');
     expect(wrapper.find('.container').length).toEqual(1);
     expect(wrapper.find('.content').length).toEqual(1);
     expect(wrapper.find('.sidebar').length).toEqual(1);
 
-    expect(wrapper.find(Box).length).toEqual(2);
+    expect(wrapper.find(Box).length).toEqual(3);
   });
 });

@@ -135,6 +135,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
           maxDate={moment()}
           className="modal-input"
           onChange={this.onChangeDate}
+          readOnly={true}
         />
         <h4>Amount</h4>
         <input

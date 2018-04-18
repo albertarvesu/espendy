@@ -38,7 +38,7 @@ export interface TransactionInterface {
   remarks?: string;
 }
 
-interface TransactionMeta {
+export interface TransactionsMetaInterface {
   [key: string]: TransactionInterface;
 }
 
@@ -47,7 +47,7 @@ export interface TransactionStateInterface {
   isFetching: boolean;
   hasError: boolean;
   error?: string;
-  data?: TransactionMeta;
+  data?: TransactionsMetaInterface;
 }
 
 export interface AppStateInterface {

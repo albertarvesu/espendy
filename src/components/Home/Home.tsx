@@ -7,11 +7,12 @@ import { isEmpty } from 'lodash';
 import Box from './../Box/Box';
 import Balance from './../Balance/Balance';
 import AddTransaction from './../AddTransaction/AddTransaction';
+import Transactions from './../Transactions/Transactions';
 
 import { getTransactions, GetTransactionsInterface } from './../../actions/transactions';
-import { AppStateInterface, UserInterface } from '../../reducers';
+import { AppStateInterface, UserInterface, TransactionInterface } from '../../reducers';
 import { selectCurrentUser } from './../../selectors/user';
-import { selectCurrentBalance } from './../../selectors/transactions';
+import { selectAllTransactions, selectCurrentBalance } from './../../selectors/transactions';
 
 import './Home.css';
 
@@ -21,6 +22,7 @@ interface HomeProps {
   currentUser: UserInterface;
   currentBalance: number;
   getTransactions: GetTransactionsInterface;
+  transactions: Array<TransactionInterface>;
 }
 
 export class Home extends React.Component<HomeProps> {
@@ -36,6 +38,7 @@ export class Home extends React.Component<HomeProps> {
   }
   
   render () {
+    const { currentUser } = this.props;
     return (
       <div className="wrapper">
         <div className="container">
@@ -54,6 +57,10 @@ export class Home extends React.Component<HomeProps> {
               <AddTransaction />
             </Box>
 
+            <Box clazz="transactions tile-link">
+              <Transactions transactions={this.props.transactions} />
+            </Box>
+
             <Link
               className="box box-td tile-link sign-out hvr-bounce-to-left"
               to="/signout"
@@ -65,12 +72,24 @@ export class Home extends React.Component<HomeProps> {
                 <p>Sign Out</p>
               </div>
             </Link>
-
           </div>
+
+          <div className="sidebar">
+            <div className="profile">
+              <img
+                alt={`${currentUser.displayName}`}
+                className="avatar"
+                src={currentUser.photoURL}
+              />
+              <div className="text">
+                <h5>{currentUser.displayName}</h5>
+                <span>{currentUser.email}</span>
+              </div>
+            </div>
+            <div className="sidebox ads" />
+          </div>
+
         </div>
-
-        <div className="sidebar" />
-
       </div>
     );
   }
@@ -79,6 +98,7 @@ export class Home extends React.Component<HomeProps> {
 const mapStateToProps = (state: AppStateInterface) => ({
   currentUser: selectCurrentUser(state),
   currentBalance: selectCurrentBalance(state),
+  transactions: selectAllTransactions(state),
 });
 
 export default compose(
