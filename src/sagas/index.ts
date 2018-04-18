@@ -2,7 +2,7 @@ import { fork, all } from 'redux-saga/effects';
 
 import { watchSignIn, watchSignOut } from './auth';
 
-import { watchCreateTransaction, watchGetTransactions } from './transaction';
+import { watchCreateTransaction, watchGetTransactions } from './transactions';
 
 export function* rootSaga() {
   yield all(

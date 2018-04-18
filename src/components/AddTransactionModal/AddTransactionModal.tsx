@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import * as moment from 'moment';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import  { db } from './../../firebase';
 
 import EXPENSE_TYPES from './../../constants/expenseTypes';
 import INCOME_TYPES from './../../constants/incomeTypes';
@@ -87,10 +88,12 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
   }
 
   onSaveTransaction() {
+    const key = db.ref().child('transactions').push().key;
     const transaction: TransactionInterface = {
+      id: key || undefined,
       type: this.state.type,
       category: this.state.category,
-      date: this.state.date.toISOString(),
+      date: this.state.date.toDate(),
       amount: parseFloat(this.state.amount),
       remarks: this.state.remarks,
     };

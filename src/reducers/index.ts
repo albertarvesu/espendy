@@ -34,7 +34,7 @@ export interface TransactionInterface {
   type: string;
   category: string;
   amount: number;
-  date?: string;
+  date?: Date;
   remarks?: string;
 }
 
