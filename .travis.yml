@@ -10,10 +10,10 @@ script:
   - npm run build
 after_success:
   - codecov
-# deploy:
-#   provider: pages
-#   skip_cleanup: true
-#   github_token: 237a9289040d2dc2d3e4be783d1887247af59465
-#   local_dir: build
-#   on:
-#     branch: master
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: build
+  on:
+    branch: master
