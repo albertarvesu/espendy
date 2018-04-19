@@ -2,6 +2,7 @@
   "name": "espendy",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/albertarvesu/espendy",
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "@types/enzyme": "^3.1.9",
