@@ -18,13 +18,13 @@ describe('Testing Reducer Auth', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('returns default state upon LOGOUT', () => {
+  it('returns default state upon SIGNOUT', () => {
     const expected = initialAuthState;
     const actual = auth(expected, { type: ACTION_TYPES.SIGNOUT_SUCCESS });
     expect(actual).toEqual(expected);
   });
 
-  it('switch to isLoggingIn = true LOGIN', () => {
+  it('switch to isLoggingIn = true SIGNIN', () => {
     const expected = {
       isLoggingIn: true,
       isLoggedIn: false,
@@ -35,12 +35,8 @@ describe('Testing Reducer Auth', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('switch to isLoggingIn = false, isLoggedIn = true upon SIGNIN_SUCCESS', () => {
-    const payload = {
-      credential: {
-        accessToken: '1234',
-      }
-    };
+  it('switch to isLoggingIn = false, isLoggedIn = true upon AUTH_SUCCESS', () => {
+    const payload = '1234';
     const expected = {
       isLoggingIn: false,
       isLoggedIn: true,
@@ -48,7 +44,7 @@ describe('Testing Reducer Auth', () => {
       accessToken: '1234',
     };
     const actual = auth(expected, {
-      type: ACTION_TYPES.SIGNIN_SUCCESS,
+      type: ACTION_TYPES.AUTH_SUCCESS,
       payload,
     });
     expect(actual).toEqual(expected);
