@@ -4,8 +4,26 @@
 
 A simple expenses tracker web application built on top of the following technologies:
 
-1. React 16
-1. Typescript
-1. Jest/Enzyme
-1. Firebase
-1. Redux-Saga Middleware
+Jump straight to the [Demo](https://albertarvesu.github.io/espendy/)
+
+# Technologies/Used
+```
+React 16
+Typescript
+Jest/Enzyme
+Firebase
+Redux-Saga Middleware
+```
+
+# Integrations
+```
+Travis CI
+Codecov
+```
+
+# Running build
+`yarn build`
+
+# Running Test
+`yarn test` - Run tests
+`yarn test:coverage` - Run tests with coverage
