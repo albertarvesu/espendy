@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { ModalContainer, ModalRoute } from 'react-router-modal';
 import { Provider } from 'react-redux';
 
@@ -37,6 +37,7 @@ class App extends React.Component {
               <Route exact={true} path="/" component={Landing} />
               <Route path="/home" component={Home} />
               <Route path="/signout" component={SignOut} />
+              <Redirect to="/" push={true} />
             </Switch>
           </div>
         </BrowserRouter>
