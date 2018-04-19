@@ -17,8 +17,20 @@ describe('Testing <Transactions />', () => {
   });
   it('renders transactions correctly', () => {
     const transactions = [
-      {id: '1', date: new Date(), type: 'expenses', category: 'egw', remarks: 'remarks'} as TransactionInterface,
-      {id: '2', date: new Date(), type: 'income', category: 'bon', remarks: 'bonus'} as TransactionInterface
+      {
+        id: '1',
+        date: new Date().getTime(),
+        type: 'expenses',
+        category: 'egw',
+        remarks: 'remarks'
+      } as TransactionInterface,
+      {
+        id: '2',
+        date: new Date().getTime(),
+        type: 'income',
+        category: 'bon',
+        remarks: 'bonus'
+      } as TransactionInterface
     ];
     const wrapper = shallow(<Transactions transactions={transactions} />);
     expect(wrapper.find('.lists tr').length).toEqual(3);

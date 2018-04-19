@@ -1,4 +1,4 @@
-import { get, groupBy, Dictionary } from 'lodash';
+import { get, groupBy, Dictionary, isEmpty } from 'lodash';
 import * as moment from 'moment';
 import { AppStateInterface, TransactionInterface } from './../reducers';
 
@@ -9,7 +9,7 @@ export const selectAllTransactions = (state: AppStateInterface): Array<Transacti
   const transactions = get(selectTransactions(state), 'data', []);
   return Object.keys(transactions).map(key => transactions[key])
         .concat()
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        .sort((a, b) => b.date - a.date);
 };
 
 export const selectExpensesTransactions = (state: AppStateInterface): Array<TransactionInterface> => {
@@ -23,6 +23,9 @@ const calcuateByDate = (
   from: moment.Moment = moment().startOf('month'),
   to: moment.Moment = moment(),
 ): object => {
+  if (isEmpty(grouped)) {
+    return grouped;
+  }
   const withAmt = Object.keys(grouped).reduce(
     (curr, dateStr) => {
       const byDate: Array<TransactionInterface> = grouped[dateStr];

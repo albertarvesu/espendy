@@ -8,8 +8,8 @@ const history = { push: () => {} };
 describe('Testing settings actions', () => {
   it('should dispatch proper action upon createTransaction', () => {
     const settings: SettingsInterface = {
-      from: new Date(),
-      to: new Date(),
+      from: new Date().getTime(),
+      to: new Date().getTime(),
       currency: 'USD',
       roundingValue: 0,
     };

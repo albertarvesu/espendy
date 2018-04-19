@@ -15,8 +15,8 @@ const initialState: SettingsStateInteface = {
   isUpdating: false,
   error: '',
   data: {
-    from: new Date(),
-    to: new Date(),
+    from: 0,
+    to: 0,
     currency: 'USD',
     roundingValue: 0,
   }

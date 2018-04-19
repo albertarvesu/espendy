@@ -2,8 +2,8 @@ import { AppStateInterface, SettingsInterface, SettingsStateInteface } from '../
 import { selectUserSettings, selectSettings } from '../settings';
 
 const settings: SettingsInterface = {
-  from: new Date(),
-  to: new Date(),
+  from: new Date().getTime(),
+  to: new Date().getTime(),
   roundingValue: 0,
   currency: 'USD',
 };

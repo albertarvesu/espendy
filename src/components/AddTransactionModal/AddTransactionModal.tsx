@@ -105,7 +105,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
       id: key || undefined,
       type: this.state.type,
       category: this.state.category,
-      date: this.state.date.toDate(),
+      date: this.state.date.endOf('day').toDate().getTime(),
       amount: parseFloat(this.state.amount),
       remarks: this.state.remarks,
     };
@@ -153,7 +153,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         <h4>Amount</h4>
         <input
           type="number"
-          placeholder="100.00"
+          placeholder="0.00"
           className="modal-input"
           value={this.state.amount}
           onChange={this.onChangeAmount}

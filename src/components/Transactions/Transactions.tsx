@@ -31,15 +31,15 @@ export class Transactions extends React.Component<TransactionsProps> {
           <table className="lists">
             <tbody>
               <tr>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Remarks</th>
-                <th>Amount</th>
+                <th className="td-date">Date</th>
+                <th className="td-category">Category</th>
+                <th className="td-remarks">Remarks</th>
+                <th className="td-amount">Amount</th>
               </tr>
               {transactions.slice(0, MAX_DISPLAY).map(transaction => (
-                <tr key={transaction.id}>
-                  <td>{moment(transaction.date).format('l')}</td>
-                  <td>
+                <tr key={transaction.id} className="tr-row">
+                  <td className="td-date">{moment(transaction.date).format('l')}</td>
+                  <td className="td-category">
                     {transaction.type === 'expenses' ? (
                       <span className="category" title={EXPENSE_TYPES[transaction.category]}>
                         {transaction.category.toUpperCase()}
@@ -50,8 +50,10 @@ export class Transactions extends React.Component<TransactionsProps> {
                       </span>
                     )}
                   </td>
-                  <td>{transaction.remarks}</td>
-                  <td>
+                  <td className="td-remarks">
+                    <span title={transaction.remarks}>{transaction.remarks}</span>
+                  </td>
+                  <td className="td-amount">
                     {`${transaction.type === 'expenses' ? '-' : ''}`}
                     <Currency quantity={transaction.amount} currency={this.props.currency} />
                   </td>

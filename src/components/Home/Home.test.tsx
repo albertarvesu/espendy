@@ -12,8 +12,8 @@ const currentUser: UserInterface = {
   displayName: '',
 };
 const settings: SettingsInterface = {
-  from: new Date(),
-  to: new Date(),
+  from: new Date().getTime(),
+  to: new Date().getTime(),
   currency: 'USD',
   roundingValue: 0,
 };

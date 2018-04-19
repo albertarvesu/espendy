@@ -8,8 +8,8 @@ const initialState: SettingsStateInteface = {
   isUpdating: false,
   error: '',
   data: {
-    from: new Date(),
-    to: new Date(),
+    from: 0,
+    to: 0,
     currency: 'USD',
     roundingValue: 0,
   }
@@ -30,8 +30,8 @@ describe('Testing Reducer Settings', () => {
 
   it('store user values propery upon UPDATE_SETTINGS SUCCESS', () => {
     const payload = {
-      from: new Date(),
-      to: new Date(),
+      from: new Date().getTime(),
+      to: new Date().getTime(),
       currency: 'PHP',
       roundingValue: 100,
     };

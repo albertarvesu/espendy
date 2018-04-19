@@ -24,22 +24,11 @@ interface SettingsState {
 }
 
 export class SettingsModal extends React.Component<SettingsProps, SettingsState> {
-
-  static defaultProps: SettingsProps = {
-    history: null,
-    settings: {
-      from: moment().startOf('month').toDate(),
-      to: moment().endOf('day').toDate(),
-      roundingValue: 0,
-      currency: 'USD',
-    } as SettingsInterface
-  };
-
   constructor(props: SettingsProps) {
     super(props);
     this.state = {
-      from: moment(props.settings.from),
-      to: moment(props.settings.to),
+      from: props.settings.from ? moment(props.settings.from) : moment().startOf('month'),
+      to: props.settings.to ? moment(props.settings.to) : moment(),
       roundingValue: props.settings.roundingValue,
       currency: props.settings.currency,
     };
@@ -48,8 +37,8 @@ export class SettingsModal extends React.Component<SettingsProps, SettingsState>
   
   onUpdate() {
     const currentSettings: SettingsInterface = {
-      from: this.state.from.toDate(),
-      to: this.state.to.toDate(),
+      from: this.state.from.startOf('day').toDate().getTime(),
+      to: this.state.to.endOf('day').toDate().getTime(),
       currency: this.state.currency,
       roundingValue: this.state.roundingValue,
     };
@@ -110,7 +99,7 @@ export class SettingsModal extends React.Component<SettingsProps, SettingsState>
         <input
           type="number"
           name="roundingValue"
-          placeholder="100.00"
+          placeholder="100"
           className="modal-input"
           value={this.state.roundingValue}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

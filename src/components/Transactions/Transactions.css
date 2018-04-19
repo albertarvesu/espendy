@@ -45,9 +45,35 @@
   opacity: 0.75;
 }
 
-.transactions .lists td:last-child {
+.transactions .td-date {
+  width: 20%;
+}
+
+.transactions .td-category {
   width: 10%;
+}
+
+.transactions .td-remarks {
+  width: 30%;
+}
+
+.transactions .td-remarks > span {
+  white-space: nowrap;
+  width: 5rem;
+  display: block;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  overflow: hidden;
+  font-size: 0.825rem;
+}
+
+.transactions .td-amount {
+  width: 40%;
   text-align: right;
+}
+
+.transactions th {
+  text-align: center;
 }
 
 .transactions .footer {

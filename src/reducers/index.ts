@@ -31,8 +31,8 @@ export interface UserStateInterface {
 }
 
 export interface SettingsInterface {
-  from: Date;
-  to: Date;
+  from: number;
+  to: number;
   currency: string;
   roundingValue: number;
 }
@@ -49,7 +49,7 @@ export interface TransactionInterface {
   type: string;
   category: string;
   amount: number;
-  date?: Date;
+  date?: number;
   remarks?: string;
 }
 

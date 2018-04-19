@@ -56,7 +56,10 @@ export class Home extends React.Component<HomeProps> {
   }
 
   componentWillReceiveProps(nextProps: HomeProps) {
-    if (this.props.currentUser !== nextProps.currentUser && !isEmpty(nextProps.currentUser)) {
+    if (
+      (this.props.currentUser !== nextProps.currentUser && !isEmpty(nextProps.currentUser)) ||
+      this.props.settings !== nextProps.settings
+    ) {
       this.props.getTransactions(nextProps.currentUser);
     }
   }
@@ -96,7 +99,7 @@ export class Home extends React.Component<HomeProps> {
               <AddTransaction />
             </Box>
 
-            {!isEmpty(this.props.expensesByDate) && !isEmpty(this.props.incomesByDate) && (
+            {(!isEmpty(this.props.expensesByDate) || !isEmpty(this.props.incomesByDate)) && (
               <Box clazz="chart line">
                 <LineChart
                   expensesByDate={this.props.expensesByDate}
@@ -168,6 +171,8 @@ export class Home extends React.Component<HomeProps> {
 
 const mapStateToProps = (state: AppStateInterface) => {
   const settings: SettingsInterface = selectUserSettings(state);
+  const from = settings.from ? moment(settings.from) : undefined;
+  const to = settings.to ? moment(settings.to) : undefined;
   return {
     currentUser: selectCurrentUser(state),
     settings,
@@ -175,8 +180,8 @@ const mapStateToProps = (state: AppStateInterface) => {
     transactions: selectAllTransactions(state),
     expenses: selectExpensesTransactions(state),
     totalExpenses: selectTotalExpenses(state),
-    expensesByDate: selectExpensesTransactionsByDate(state, undefined, moment(settings.from), moment(settings.to)),
-    incomesByDate: selectIncomeTransactionsByDate(state, undefined, moment(settings.from), moment(settings.to)),
+    expensesByDate: selectExpensesTransactionsByDate(state, undefined, from, to),
+    incomesByDate: selectIncomeTransactionsByDate(state, undefined, from, to),
   };
 };
 

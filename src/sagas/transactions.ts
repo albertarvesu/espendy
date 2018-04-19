@@ -3,7 +3,8 @@ import * as ACTION_TYPES from '../constants/actionTypes';
 import * as API from './../api/transactions';
 import { AppActionInterface } from '../actions';
 import { selectCurrentUser } from '../selectors/user';
-import { UserInterface } from '../reducers';
+import { selectUserSettings } from '../selectors/settings';
+import { UserInterface, SettingsInterface } from '../reducers';
 import { eventChannel } from 'redux-saga';
 
 export function* createTransaction(action: AppActionInterface) {
@@ -28,10 +29,12 @@ export function* watchCreateTransaction() {
   yield takeLatest(ACTION_TYPES.CREATE_TRANSACTION, createTransaction);
 }
 
-function fetchTransactions(currentUser: UserInterface) {
+function fetchTransactions(currentUser: UserInterface, settings: SettingsInterface) {
   const listener: any = eventChannel(emit => {
-    API.getTransactions(currentUser).on('value', (snap: any) => snap.val() && emit(snap.val()));
-    return () => API.getTransactions(currentUser).off(listener);
+    API.getTransactions(currentUser, settings).on('value', (snap: any) => {
+      return snap.val() && emit(snap.val());
+    });
+    return () => API.getTransactions(currentUser, settings).off(listener);
   });
   return listener;
 }
@@ -39,7 +42,8 @@ function fetchTransactions(currentUser: UserInterface) {
 export function* getTransactions(action: AppActionInterface) {
   try {
     const currentUser: UserInterface = action.payload;
-    const listener = yield call(fetchTransactions, currentUser);
+    const settings: SettingsInterface = yield select(selectUserSettings);
+    const listener = yield call(fetchTransactions, currentUser, settings);
     while (true) {
       const transactions = yield take(listener);
       if (transactions) {
