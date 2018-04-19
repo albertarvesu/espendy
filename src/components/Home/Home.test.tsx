@@ -4,18 +4,26 @@ import { shallow } from 'enzyme';
 import { Home } from './Home';
 import Box from '../Box/Box';
 
-import { UserInterface, TransactionInterface } from '../../reducers';
+import { UserInterface, TransactionInterface, SettingsInterface } from '../../reducers';
+
+const currentUser: UserInterface = {
+  uid: '',
+  email: '',
+  displayName: '',
+};
+const settings: SettingsInterface = {
+  from: new Date(),
+  to: new Date(),
+  currency: 'USD',
+  roundingValue: 0,
+};
 
 describe('Testing <Home />', () => {
   it('renders the skeletons of element', () => {
-    const currentUser: UserInterface = {
-      uid: '',
-      email: '',
-      displayName: '',
-    };
     const wrapper = shallow(
       <Home
         currentUser={currentUser}
+        settings={settings}
         // tslint:disable-next-line:no-empty
         getTransactions={() => {}}
         currentBalance={0}
@@ -34,14 +42,10 @@ describe('Testing <Home />', () => {
     expect(wrapper.find(Box).length).toEqual(2);
   });
   it('renders transactions if not empty', () => {
-    const currentUser: UserInterface = {
-      uid: '',
-      email: '',
-      displayName: '',
-    };
     const wrapper = shallow(
       <Home
         currentUser={currentUser}
+        settings={settings}
         // tslint:disable-next-line:no-empty
         getTransactions={() => {}}
         currentBalance={0}

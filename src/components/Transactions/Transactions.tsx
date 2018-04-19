@@ -15,6 +15,7 @@ const MAX_DISPLAY = 9;
 
 interface TransactionsProps {
   transactions: Array<TransactionInterface>;
+  currency?: string;
 }
 
 export class Transactions extends React.Component<TransactionsProps> {
@@ -50,7 +51,10 @@ export class Transactions extends React.Component<TransactionsProps> {
                     )}
                   </td>
                   <td>{transaction.remarks}</td>
-                  <td>{`${transaction.type === 'expenses' ? '-' : ''}`}<Currency quantity={transaction.amount} /></td>
+                  <td>
+                    {`${transaction.type === 'expenses' ? '-' : ''}`}
+                    <Currency quantity={transaction.amount} currency={this.props.currency} />
+                  </td>
                 </tr>
               ))}
             </tbody>

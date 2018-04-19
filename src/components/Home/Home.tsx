@@ -2,6 +2,7 @@ import * as React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import * as moment from 'moment';
 import { isEmpty, debounce } from 'lodash';
 
 import Box from './../Box/Box';
@@ -12,8 +13,9 @@ import LineChart from './../LineChart/LineChart';
 import PieChart from './../PieChart/PieChart';
 
 import { getTransactions, GetTransactionsInterface } from './../../actions/transactions';
-import { AppStateInterface, UserInterface, TransactionInterface } from '../../reducers';
+import { AppStateInterface, UserInterface, TransactionInterface, SettingsInterface } from '../../reducers';
 import { selectCurrentUser } from './../../selectors/user';
+import { selectUserSettings } from './../../selectors/settings';
 import {
   selectAllTransactions,
   selectCurrentBalance,
@@ -33,6 +35,7 @@ const SignoutIcon = require('./../../images/power-button.svg');
 interface HomeProps {
   currentUser: UserInterface;
   currentBalance: number;
+  settings: SettingsInterface;
   getTransactions: GetTransactionsInterface;
   transactions: Array<TransactionInterface>;
   expenses: Array<TransactionInterface>;
@@ -81,7 +84,7 @@ export class Home extends React.Component<HomeProps> {
           <div className="content">
 
             <Box type="lr" clazz="balance">
-              <Balance amount={this.props.currentBalance} currency="SGD" />
+              <Balance amount={this.props.currentBalance} currency={this.props.settings.currency} />
             </Box>
 
             <Box
@@ -113,7 +116,7 @@ export class Home extends React.Component<HomeProps> {
 
             {!isEmpty(this.props.transactions) && (
               <Box clazz="transactions tile-link">
-                <Transactions transactions={this.props.transactions} />
+                <Transactions transactions={this.props.transactions} currency={this.props.settings.currency} />
               </Box>
             )}
 
@@ -163,15 +166,19 @@ export class Home extends React.Component<HomeProps> {
   }
 }
 
-const mapStateToProps = (state: AppStateInterface) => ({
-  currentUser: selectCurrentUser(state),
-  currentBalance: selectCurrentBalance(state),
-  transactions: selectAllTransactions(state),
-  expenses: selectExpensesTransactions(state),
-  totalExpenses: selectTotalExpenses(state),
-  expensesByDate: selectExpensesTransactionsByDate(state),
-  incomesByDate: selectIncomeTransactionsByDate(state),
-});
+const mapStateToProps = (state: AppStateInterface) => {
+  const settings: SettingsInterface = selectUserSettings(state);
+  return {
+    currentUser: selectCurrentUser(state),
+    settings,
+    currentBalance: selectCurrentBalance(state),
+    transactions: selectAllTransactions(state),
+    expenses: selectExpensesTransactions(state),
+    totalExpenses: selectTotalExpenses(state),
+    expensesByDate: selectExpensesTransactionsByDate(state, undefined, moment(settings.from), moment(settings.to)),
+    incomesByDate: selectIncomeTransactionsByDate(state, undefined, moment(settings.from), moment(settings.to)),
+  };
+};
 
 export default compose(
   withRouter,

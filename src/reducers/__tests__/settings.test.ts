@@ -42,7 +42,7 @@ describe('Testing Reducer Settings', () => {
       data: payload
     };
 
-    const actual = settings(expected, { type: ACTION_TYPES.UPDATE_SETTINGS, payload });
+    const actual = settings(expected, { type: ACTION_TYPES.UPDATE_SETTINGS_SUCCESS, payload });
     expect(actual).toEqual(expected);
   });
 

@@ -89,6 +89,7 @@ export class SettingsModal extends React.Component<SettingsProps, SettingsState>
           name="dateTo"
           dateFormat="MMM DD, YYYY"
           selected={this.state.to}
+          minDate={moment(this.state.from).clone().add(7, 'days')}
           maxDate={moment()}
           className="modal-input"
           readOnly={true}

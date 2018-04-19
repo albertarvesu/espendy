@@ -20,7 +20,7 @@ export const selectExpensesTransactions = (state: AppStateInterface): Array<Tran
 const calcuateByDate = (
   grouped: Dictionary<TransactionInterface[]>,
   format: string,
-  from: string,
+  from: moment.Moment = moment().startOf('month'),
   to: moment.Moment = moment(),
 ): object => {
   const withAmt = Object.keys(grouped).reduce(
@@ -36,7 +36,7 @@ const calcuateByDate = (
   );
 
   let dates = {};
-  let day = moment().startOf('month');
+  let day = from;
   while (day <= to) {
     const formatted = day.format(format);
     dates = { ...dates, [formatted]: withAmt[formatted] ? withAmt[formatted] : 0 };
@@ -48,7 +48,7 @@ const calcuateByDate = (
 export const selectExpensesTransactionsByDate = (
   state: AppStateInterface,
   format: string = 'MMM DD',
-  from: string = 'month',
+  from: moment.Moment = moment().startOf('month'),
   to: moment.Moment = moment(),
 ): object => {
   const expenses = selectExpensesTransactions(state).reverse();
@@ -64,7 +64,7 @@ export const selectIncomeTransactions = (state: AppStateInterface): Array<Transa
 export const selectIncomeTransactionsByDate = (
   state: AppStateInterface,
   format: string = 'MMM DD',
-  from: string = 'month',
+  from: moment.Moment = moment().startOf('month'),
   to: moment.Moment = moment(),
 ): object => {
   const incomes = selectIncomeTransactions(state).reverse();

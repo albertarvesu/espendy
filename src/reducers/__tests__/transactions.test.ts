@@ -72,7 +72,7 @@ describe('Testing Reducer Transactions', () => {
       data: payload
     };
     const expected = state;
-    const actual = transactions(expected, { type: 'CREATE_TRANSACTION_SUCCESS', payload });
+    const actual = transactions(expected, { type: 'GET_TRANSACTIONS_SUCCESS', payload });
     expect(actual).toEqual(expected);
   });
   it('set errors on failure', () => {
