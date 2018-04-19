@@ -1,4 +1,3 @@
-
 import * as ACTION_TYPES from './../constants/actionTypes';
 import { AppActionInterface } from './';
 import { TransactionInterface, UserInterface } from './../reducers';

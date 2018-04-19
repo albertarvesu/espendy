@@ -153,7 +153,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         <h4>Amount</h4>
         <input
           type="number"
-          placeholder="e.g. 100.00"
+          placeholder="100.00"
           className="modal-input"
           value={this.state.amount}
           onChange={this.onChangeAmount}
@@ -161,7 +161,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         <h4>Remarks</h4>
         <textarea
           className="modal-input-textarea"
-          placeholder="Remarks"
+          placeholder="January bill payment"
           value={this.state.remarks}
           onChange={this.onChangeRemarks}
         />

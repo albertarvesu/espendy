@@ -30,7 +30,7 @@ export class Transactions extends React.Component<TransactionsProps> {
           <table className="lists">
             <tbody>
               <tr>
-                <th>Date/Time</th>
+                <th>Date</th>
                 <th>Category</th>
                 <th>Remarks</th>
                 <th>Amount</th>

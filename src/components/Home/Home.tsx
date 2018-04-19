@@ -27,6 +27,7 @@ import './Home.css';
 
 const MAX_DOCUMENT_WIDTH = 700;
 
+const SettingsIcon = require('./../../images/settings.svg');
 const SignoutIcon = require('./../../images/power-button.svg');
 
 interface HomeProps {
@@ -115,6 +116,18 @@ export class Home extends React.Component<HomeProps> {
                 <Transactions transactions={this.props.transactions} />
               </Box>
             )}
+
+            <Link
+              className="box box-td tile-link settings hvr-bounce-to-left"
+              to="/home/settings"
+            >
+              <div className="lead">
+                <img alt="Settings" className="icon" src={SettingsIcon} />
+              </div>
+              <div className="summary">
+                <p>Settings</p>
+              </div>
+            </Link>
 
             <Link
               className="box box-td tile-link sign-out hvr-bounce-to-left"

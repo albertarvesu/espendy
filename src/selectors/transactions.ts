@@ -21,13 +21,15 @@ const calcuateByDate = (
   grouped: Dictionary<TransactionInterface[]>,
   format: string,
   from: string,
+  to: moment.Moment = moment(),
 ): object => {
   const withAmt = Object.keys(grouped).reduce(
     (curr, dateStr) => {
       const byDate: Array<TransactionInterface> = grouped[dateStr];
       return {
         ...curr,
-        [moment(dateStr).format(format)]: byDate.reduce((total, current) => total + current.amount, 0)
+        [moment(dateStr).format(format)]:
+          byDate.reduce((total, current) => total + current.amount, 0)
       };
     },
     {}
@@ -35,7 +37,7 @@ const calcuateByDate = (
 
   let dates = {};
   let day = moment().startOf('month');
-  while (day <= moment()) {
+  while (day <= to) {
     const formatted = day.format(format);
     dates = { ...dates, [formatted]: withAmt[formatted] ? withAmt[formatted] : 0 };
     day = day.clone().add(1, 'd');
@@ -46,11 +48,12 @@ const calcuateByDate = (
 export const selectExpensesTransactionsByDate = (
   state: AppStateInterface,
   format: string = 'MMM DD',
-  from: string = 'month'
+  from: string = 'month',
+  to: moment.Moment = moment(),
 ): object => {
   const expenses = selectExpensesTransactions(state).reverse();
   const grouped = groupBy(expenses, expense => moment(expense.date).startOf('day').format());
-  return calcuateByDate(grouped, format, from);
+  return calcuateByDate(grouped, format, from, to);
 };
 
 export const selectIncomeTransactions = (state: AppStateInterface): Array<TransactionInterface> => {
@@ -61,11 +64,12 @@ export const selectIncomeTransactions = (state: AppStateInterface): Array<Transa
 export const selectIncomeTransactionsByDate = (
   state: AppStateInterface,
   format: string = 'MMM DD',
-  from: string = 'month'
+  from: string = 'month',
+  to: moment.Moment = moment(),
 ): object => {
   const incomes = selectIncomeTransactions(state).reverse();
   const grouped = groupBy(incomes, income => moment(income.date).startOf('day').format());
-  return calcuateByDate(grouped, format, from);
+  return calcuateByDate(grouped, format, from, to);
 };
 
 export const selectTotalIncome = (state: AppStateInterface): number => {

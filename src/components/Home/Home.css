@@ -14,7 +14,6 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 1rem;
-  margin-bottom: 1rem;
 }
 
 .sidebar {
@@ -26,6 +25,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  margin: 1rem;
 }
 
 .tile-link .summary {
@@ -49,6 +49,10 @@
 
 .add-new {
   background-color: #fa6800;
+}
+
+.settings {
+  background-color: #0050ef;
 }
 
 .sign-out {
@@ -80,8 +84,12 @@
   margin: 0;
 }
 
+.profile span {
+  font-size: 0.75rem;
+}
+
 .profile .text {
-  margin-left: 1rem;
+  margin-left: .75rem;
   display: flex;
   flex-direction: column;
 }

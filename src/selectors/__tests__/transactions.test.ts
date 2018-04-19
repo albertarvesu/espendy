@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { AppStateInterface, TransactionStateInterface } from '../../reducers';
 import {
   selectTransactions,
@@ -71,7 +72,9 @@ describe('Testing Selector Transaction', () => {
       date: new Date('2018-04-15T04:40:08.013Z'),
       type: 'income'
     }]);
-    expect(selectExpensesTransactionsByDate(appState)).toEqual({
+    expect(
+      selectExpensesTransactionsByDate(appState, undefined, undefined, moment('2018-04-18T04:40:08.013Z'))
+    ).toEqual({
       'Apr 01': 0,
       'Apr 02': 0,
       'Apr 03': 0,
@@ -91,7 +94,9 @@ describe('Testing Selector Transaction', () => {
       'Apr 17': 0,
       'Apr 18': 0,
     });
-    expect(selectIncomeTransactionsByDate(appState)).toEqual({
+    expect(
+      selectIncomeTransactionsByDate(appState, undefined, undefined, moment('2018-04-18T04:40:08.013Z'))
+    ).toEqual({
       'Apr 01': 0,
       'Apr 02': 0,
       'Apr 03': 0,

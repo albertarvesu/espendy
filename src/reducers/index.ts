@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 
 import { auth } from './auth';
-import { user } from './user';
+import { settings } from './settings';
 import { transactions } from './transactions';
+import { user } from './user';
 
 export interface AuthStateInterface {
   isLoggingIn: boolean;
@@ -29,6 +30,20 @@ export interface UserStateInterface {
   data?: UserInterface;
 }
 
+export interface SettingsInterface {
+  from: Date;
+  to: Date;
+  currency: string;
+  roundingValue: number;
+}
+
+export interface SettingsStateInteface {
+  isUpdating: boolean;
+  hasError?: boolean;
+  error?: string;
+  data?: SettingsInterface;
+}
+
 export interface TransactionInterface {
   id?: string;
   type: string;
@@ -52,14 +67,16 @@ export interface TransactionStateInterface {
 
 export interface AppStateInterface {
   auth?: AuthStateInterface;
-  user?: UserStateInterface;
+  settings?: SettingsStateInteface;
   transactions?: TransactionStateInterface;
+  user?: UserStateInterface;
 }
 
 export const rootReducer = combineReducers({
   auth,
-  user,
+  settings,
   transactions,
+  user,
 });
 
 export default rootReducer;

@@ -5,7 +5,6 @@ body {
 
 /* Bounce To Left */
 .hvr-bounce-to-left {
-  display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);

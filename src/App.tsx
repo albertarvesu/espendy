@@ -9,6 +9,7 @@ import Landing from './components/Landing/Landing';
 import Home from './components/Home/Home';
 import SignOut from './components/SignOut/SignOut';
 import AddTransactionModal from './components/AddTransactionModal/AddTransactionModal';
+import SettingsModal from './components/SettingsModal/SettingsModal';
 
 import 'react-router-modal/css/react-router-modal.css';
 import './App.css';
@@ -21,11 +22,11 @@ class App extends React.Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-          {/* <ModalRoute
+            <ModalRoute
               component={SettingsModal}
               path="/home/settings"
               className="modal-content settings"
-            /> */}
+            />
             <ModalRoute
               component={AddTransactionModal}
               path="/home/add-transaction"

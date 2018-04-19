@@ -2,6 +2,8 @@ import { fork, all } from 'redux-saga/effects';
 
 import { watchSignIn, watchSignOut } from './auth';
 
+import { watchUpdateSettings } from './settings';
+
 import { watchCreateTransaction, watchGetTransactions } from './transactions';
 
 export function* rootSaga() {
@@ -9,6 +11,8 @@ export function* rootSaga() {
     [
       fork(watchSignIn),
       fork(watchSignOut),
+
+      fork(watchUpdateSettings),
 
       fork(watchCreateTransaction),
       fork(watchGetTransactions),
