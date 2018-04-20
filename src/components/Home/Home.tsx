@@ -160,7 +160,7 @@ export class Home extends React.Component<HomeProps> {
                 <span>{currentUser.email}</span>
               </div>
             </div>
-            <div className="sidebox ads" />
+            {/* <div className="sidebox ads" /> */}
           </div>
 
         </div>

@@ -62,7 +62,7 @@ export class Routes extends React.Component<RoutesProps> {
         <ModalContainer containerClassName="modal-container" />
         <Switch>
           <Route exact={true} path="/" component={Landing} />
-          <HomeRoute path="/home" isAuthenticated={isAuthenticated} component={Home} />
+          <HomeRoute path="/home/:modal?" isAuthenticated={isAuthenticated} component={Home} />
           <Route path="/signout" component={SignOut} />
           <Redirect to="/" push={true} />
         </Switch>
