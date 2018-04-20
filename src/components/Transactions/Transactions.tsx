@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Currency from 'react-currency-formatter';
 import * as moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import { TransactionInterface } from '../../models';
 
@@ -62,9 +63,9 @@ export class Transactions extends React.Component<TransactionsProps> {
         </div>
         {transactions.length > MAX_DISPLAY && (
           <div className="footer">
-            <a href="/home/transactions" className="link">
+            <Link to="/home/transactions" className="link">
               View All Transactions ({transactions.length})
-            </a>
+            </Link>
           </div>
         )}
       </React.Fragment>
