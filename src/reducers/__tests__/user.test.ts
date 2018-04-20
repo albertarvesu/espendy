@@ -1,6 +1,6 @@
 import * as ACTION_TYPES from '../../constants/actionTypes';
 
-import { UserStateInterface } from '../';
+import { UserStateInterface } from '../../models';
 import { user } from '../user';
 
 const initialState: UserStateInterface = {

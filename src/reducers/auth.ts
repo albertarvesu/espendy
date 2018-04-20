@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 
-import { AuthStateInterface } from './';
+import { AuthStateInterface } from './../models';
 import { AppActionInterface } from './../actions';
 
 import {

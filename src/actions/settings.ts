@@ -1,7 +1,7 @@
 
 import * as ACTION_TYPES from './../constants/actionTypes';
 import { AppActionInterface } from './';
-import {  SettingsInterface } from './../reducers';
+import {  SettingsInterface } from './../models';
 
 export interface UpdateSettingsInterface {
   (settings: SettingsInterface, redirect: string, history: any): void;

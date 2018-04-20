@@ -15,7 +15,7 @@ import {
 import { signIn, SignInInterface } from './../../actions/auth';
 
 import './Landing.css';
-import { AppStateInterface, AuthStateInterface } from '../../reducers';
+import { AppStateInterface, AuthStateInterface } from '../../models';
 
 interface Props {
   hasError: boolean;

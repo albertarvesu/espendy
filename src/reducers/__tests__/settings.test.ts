@@ -1,6 +1,6 @@
 import * as ACTION_TYPES from '../../constants/actionTypes';
 
-import { SettingsStateInteface } from '../';
+import { SettingsStateInteface } from '../../models';
 import { settings } from '../settings';
 
 const initialState: SettingsStateInteface = {

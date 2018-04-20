@@ -4,7 +4,7 @@ import { watchSignIn, watchSignOut } from './auth';
 
 import { watchUpdateSettings } from './settings';
 
-import { watchCreateTransaction, watchGetTransactions } from './transactions';
+import { watchCreateTransaction, watchGetTransactions, watchDeleteTransactions } from './transactions';
 
 export function* rootSaga() {
   yield all(
@@ -16,6 +16,7 @@ export function* rootSaga() {
 
       fork(watchCreateTransaction),
       fork(watchGetTransactions),
+      fork(watchDeleteTransactions),
     ]
   );
 }

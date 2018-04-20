@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { AppStateInterface, UserStateInterface } from '../../reducers';
+import { AppStateInterface, UserStateInterface } from '../../models';
 import { selectCurrentUser, selectStateUser } from '../user';
 
 const defaultState: AppStateInterface  = {

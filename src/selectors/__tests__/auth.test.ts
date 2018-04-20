@@ -1,4 +1,4 @@
-import { AppStateInterface, AuthStateInterface } from '../../reducers';
+import { AppStateInterface, AuthStateInterface } from '../../models';
 import { selectAuth, selectAuthToken, selectIsLoggingIn, selectIsLoggedIn, selectHasError, selectError } from '../auth';
 
 const defaultState: AppStateInterface  = {

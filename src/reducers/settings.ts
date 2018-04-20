@@ -7,7 +7,7 @@ import {
   SIGNOUT_SUCCESS
 } from './../constants/actionTypes';
 
-import { SettingsStateInteface } from './';
+import { SettingsStateInteface } from './../models';
 import { AppActionInterface } from '../actions';
 
 const initialState: SettingsStateInteface = {

@@ -8,7 +8,7 @@ import DatePicker from 'react-datepicker';
 import { selectCurrentUser } from './../../selectors/user';
 import { selectUserSettings } from './../../selectors/settings';
 import { updateSettings, UpdateSettingsInterface } from './../../actions/settings';
-import { AppStateInterface, SettingsInterface } from './../../reducers';
+import { AppStateInterface, SettingsInterface } from './../../models';
 
 interface SettingsProps {
   settings: SettingsInterface;

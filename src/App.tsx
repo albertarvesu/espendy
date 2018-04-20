@@ -10,6 +10,7 @@ import Home from './components/Home/Home';
 import SignOut from './components/SignOut/SignOut';
 import AddTransactionModal from './components/AddTransactionModal/AddTransactionModal';
 import SettingsModal from './components/SettingsModal/SettingsModal';
+import TransactionsModal from './components/TransactionsModal/TransactionsModal';
 
 import 'react-router-modal/css/react-router-modal.css';
 import './App.css';
@@ -20,7 +21,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter basename={`/espendy`}>
+        <BrowserRouter>
           <div>
             <ModalRoute
               component={SettingsModal}
@@ -31,6 +32,11 @@ class App extends React.Component {
               component={AddTransactionModal}
               path="/home/add-transaction"
               className="modal-content add-new"
+            />
+            <ModalRoute
+              component={TransactionsModal}
+              path="/home/transactions"
+              className="modal-content transactions modal"
             />
             <ModalContainer containerClassName="modal-container" />
             <Switch>

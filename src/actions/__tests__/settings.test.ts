@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from './../../constants/actionTypes';
-import { SettingsInterface } from '../../reducers';
+import { SettingsInterface } from '../../models';
 import { updateSettings } from '../settings';
 
 // tslint:disable-next-line:no-empty

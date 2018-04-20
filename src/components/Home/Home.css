@@ -30,7 +30,7 @@
 
 .tile-link .summary {
   font-style: normal;
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .balance {
@@ -103,7 +103,6 @@
   background-color: #825a2c;
   min-height: 30vh;
 }
-
 
 @media only screen and (max-width: 700px) {
   .container {

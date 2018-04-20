@@ -7,7 +7,7 @@ import {
   SIGNOUT_SUCCESS
 } from './../constants/actionTypes';
 
-import { UserStateInterface } from './';
+import { UserStateInterface } from './../models';
 import { AppActionInterface } from '../actions';
 
 const initialState: UserStateInterface = {

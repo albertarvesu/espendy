@@ -2,7 +2,7 @@ import * as React from 'react';
 import './../../enzymeAdapter';
 import { shallow } from 'enzyme';
 
-import { TransactionInterface } from './../../reducers';
+import { TransactionInterface } from './../../models';
 import { Transactions } from './Transactions';
 
 describe('Testing <Transactions />', () => {

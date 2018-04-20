@@ -1,6 +1,6 @@
 import { get, groupBy, Dictionary, isEmpty } from 'lodash';
 import * as moment from 'moment';
-import { AppStateInterface, TransactionInterface } from './../reducers';
+import { AppStateInterface, TransactionInterface } from './../models';
 
 export const selectTransactions = (state: AppStateInterface) =>
   get(state, 'transactions', {});

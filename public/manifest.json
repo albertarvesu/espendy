@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "eSpendy",
+  "name": "Manage your expenses wisely.",
   "icons": [
     {
       "src": "favicon.ico",

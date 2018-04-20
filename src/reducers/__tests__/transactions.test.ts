@@ -1,4 +1,4 @@
-import { TransactionStateInterface } from './../../reducers';
+import { TransactionStateInterface } from './../../models';
 import { transactions } from '../transactions';
 
 describe('Testing Reducer Transactions', () => {
@@ -49,16 +49,19 @@ describe('Testing Reducer Transactions', () => {
   it('set proper transaction data on GET_TRANSACTIONS_SUCCESS', () => {
     const payload = {
       '-LAHwbDeLX5lUILEocrq': {
+        id: '-LAHwbDeLX5lUILEocrq',
         amount: 5600,
         category: 'sal',
         type: 'income'
       },
       '-LAHwbDeLX5lUILEocrqt': {
+        id: '-LAHwbDeLX5lUILEocrqt',
         amount: 250,
         category: 'sal',
         type: 'income'
       },
       '-LAHwmea40e1USxfCJZe': {
+        id: '-LAHwbDeLX5lUILEocrqt',
         amount: 2000,
         category: 'hrm',
         type: 'expenses'

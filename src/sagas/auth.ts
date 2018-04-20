@@ -5,7 +5,7 @@ import { get } from 'lodash';
 
 import { AppActionInterface } from './../actions';
 import { auth } from '../firebase';
-import { UserInterface } from '../reducers';
+import { UserInterface } from '../models';
 
 const firebaseAuth = auth();
 

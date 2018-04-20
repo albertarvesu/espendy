@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { AppStateInterface, TransactionStateInterface } from '../../reducers';
+import { AppStateInterface, TransactionStateInterface } from '../../models';
 import {
   selectTransactions,
   selectExpensesTransactions,
@@ -35,18 +35,21 @@ describe('Testing Selector Transaction', () => {
         error: '',
         data: {
           '-LAHwbDeLX5lUILEocrq': {
+            id: '-LAHwbDeLX5lUILEocrq',
             amount: 5600,
             category: 'sal',
             date: new Date('2018-04-18T04:40:08.013Z').getTime(),
             type: 'income'
           },
           '-LAHwbDeLX5lUILEocrqt': {
+            id: '-LAHwbDeLX5lUILEocrqt',
             amount: 250,
             category: 'sal',
             date: new Date('2018-04-15T04:40:08.013Z').getTime(),
             type: 'income'
           },
           '-LAHwmea40e1USxfCJZe': {
+            id: '-LAHwmea40e1USxfCJZe',
             amount: 2000,
             category: 'hrm',
             date: new Date('2018-04-10T04:40:08.013Z').getTime(),
@@ -56,17 +59,20 @@ describe('Testing Selector Transaction', () => {
       },
     };
     expect(selectExpensesTransactions(appState)).toEqual([{
+      id: '-LAHwmea40e1USxfCJZe',
       amount: 2000,
       category: 'hrm',
       date: new Date('2018-04-10T04:40:08.013Z').getTime(),
       type: 'expenses'
     }]);
     expect(selectIncomeTransactions(appState)).toEqual([{
+      id: '-LAHwbDeLX5lUILEocrq',
       amount: 5600,
       category: 'sal',
       date: new Date('2018-04-18T04:40:08.013Z').getTime(),
       type: 'income'
     }, {
+      id: '-LAHwbDeLX5lUILEocrqt',
       amount: 250,
       category: 'sal',
       date: new Date('2018-04-15T04:40:08.013Z').getTime(),

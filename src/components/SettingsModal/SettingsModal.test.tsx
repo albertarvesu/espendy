@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import './../../enzymeAdapter';
 
 import { SettingsModal } from './SettingsModal';
-import { SettingsInterface } from './../../reducers';
+import { SettingsInterface } from './../../models';
 
 const settings: SettingsInterface = {
   from: moment().startOf('month').toDate().getTime(),

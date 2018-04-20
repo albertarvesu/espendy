@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from './../../constants/actionTypes';
-import { TransactionInterface, UserInterface } from '../../reducers';
+import { TransactionInterface, UserInterface } from '../../models';
 import { createTransaction, getTransactions } from '../transactions';
 
 // tslint:disable-next-line:no-empty
@@ -8,6 +8,7 @@ const history = { push: () => {} };
 describe('Testing transactions actions', () => {
   it('should dispatch proper action upon createTransaction', () => {
     const transaction: TransactionInterface = {
+      id: '1',
       amount: 0,
       category: 'abc',
       type: 'income',

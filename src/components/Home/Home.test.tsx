@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { Home } from './Home';
 import Box from '../Box/Box';
 
-import { UserInterface, TransactionInterface, SettingsInterface } from '../../reducers';
+import { UserInterface, TransactionInterface, SettingsInterface } from '../../models';
 
 const currentUser: UserInterface = {
   uid: '',

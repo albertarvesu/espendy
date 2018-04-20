@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { get } from 'lodash';
 import { VictoryPie } from 'victory';
-import { TransactionInterface } from '../../reducers';
+import { TransactionInterface } from '../../models';
 
 import './PieChart.css';
 

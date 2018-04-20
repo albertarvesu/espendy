@@ -1,6 +1,6 @@
 import * as ACTION_TYPES from './../../constants/actionTypes';
 
-import { AuthStateInterface } from '../';
+import { AuthStateInterface } from '../../models';
 import { auth } from '../auth';
 
 const initialAuthState: AuthStateInterface  = {

@@ -4,7 +4,7 @@ import { VictoryPie } from 'victory';
 import './../../enzymeAdapter';
 import PieChart from './PieChart';
 
-import { TransactionInterface } from '../../reducers';
+import { TransactionInterface } from '../../models';
 
 describe('Testing <PieChart />', () => {
   it('renders the element', () => {

@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { AppStateInterface } from './../reducers';
+import { AppStateInterface } from './../models';
 
 export const selectAuth = (state: AppStateInterface) => get(state, 'auth', null);
 

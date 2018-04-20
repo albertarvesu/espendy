@@ -149,3 +149,108 @@ select {
   width: 17rem;
   color: rgba(0, 0, 0, 0.8);
 }
+
+/* Start Transactions */
+
+.transactions {
+  background-color: #d80073;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.transactions.box {
+  grid-row: 4/6;
+}
+
+.transactions.modal {
+  min-width: 25rem;  
+}
+
+.transactions.modal > .trans-wrap {
+  width: 100%;
+}
+
+.transactions .lead {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.transactions .header {
+  display: flex;
+  align-items: center;
+  align-self: center;
+}
+
+.transactions h5 {
+  font-size: 1.125rem;
+  margin-left: 1rem;
+}
+
+.transactions.modal h5 {
+  font-size: 1rem;
+}
+
+.transactions .category {
+  cursor: pointer;
+}
+
+.transactions .icon {
+  height: 2.5rem;
+}
+
+.transactions .lists {
+  width: 100%;
+}
+
+.transactions .lists {
+  height: 18rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: table;
+}
+
+.transactions .lists td {
+  font-size: 0.825rem;
+  opacity: 0.75;
+}
+
+.transactions .lists-wrap {
+  margin-top: 1rem;
+}
+
+.transactions .td-remarks > span {
+  white-space: nowrap;
+  display: block;
+  width: 5rem;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.transactions.modal > span {
+  width: 7rem;
+}
+
+.transactions .td-amount {
+  text-align: right;
+}
+
+.transactions th {
+  text-align: center;
+}
+
+.transactions .footer {
+  text-align: center;
+}
+
+.transactions .action-icon {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.transactions .action-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 0.25rem;
+}

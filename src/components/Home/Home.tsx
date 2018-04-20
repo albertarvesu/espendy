@@ -13,7 +13,7 @@ import LineChart from './../LineChart/LineChart';
 import PieChart from './../PieChart/PieChart';
 
 import { getTransactions, GetTransactionsInterface } from './../../actions/transactions';
-import { AppStateInterface, UserInterface, TransactionInterface, SettingsInterface } from '../../reducers';
+import { AppStateInterface, UserInterface, TransactionInterface, SettingsInterface } from '../../models';
 import { selectCurrentUser } from './../../selectors/user';
 import { selectUserSettings } from './../../selectors/settings';
 import {

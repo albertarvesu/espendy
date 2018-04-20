@@ -1,4 +1,4 @@
-import { AppStateInterface, SettingsInterface, SettingsStateInteface } from '../../reducers';
+import { AppStateInterface, SettingsInterface, SettingsStateInteface } from '../../models';
 import { selectUserSettings, selectSettings } from '../settings';
 
 const settings: SettingsInterface = {

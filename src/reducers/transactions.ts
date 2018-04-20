@@ -10,7 +10,7 @@ import {
   SIGNOUT_SUCCESS
 } from './../constants/actionTypes';
 
-import { TransactionStateInterface } from './';
+import { TransactionStateInterface } from './../models';
 import { AppActionInterface } from '../actions';
 
 const initialState: TransactionStateInterface = {

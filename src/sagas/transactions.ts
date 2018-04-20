@@ -4,7 +4,7 @@ import * as API from './../api/transactions';
 import { AppActionInterface } from '../actions';
 import { selectCurrentUser } from '../selectors/user';
 import { selectUserSettings } from '../selectors/settings';
-import { UserInterface, SettingsInterface } from '../reducers';
+import { UserInterface, SettingsInterface } from '../models';
 import { eventChannel } from 'redux-saga';
 
 export function* createTransaction(action: AppActionInterface) {
@@ -60,4 +60,21 @@ export function* getTransactions(action: AppActionInterface) {
 
 export function* watchGetTransactions() {
   yield takeLatest(ACTION_TYPES.GET_TRANSACTIONS, getTransactions);
+}
+
+export function* deleteTransaction(action: AppActionInterface) {
+  try {
+    const currentUser = yield select(selectCurrentUser);
+
+    yield call(API.deleteTransaction, action.payload, currentUser);
+
+    yield put({ type: ACTION_TYPES.CREATE_TRANSACTION_SUCCESS } as AppActionInterface);
+
+  } catch (error) {
+    yield put({ type: ACTION_TYPES.DELETE_TRANSACTION_FAILURE, payload: error.message } as AppActionInterface);
+  }
+}
+
+export function* watchDeleteTransactions() {
+  yield takeLatest(ACTION_TYPES.DELETE_TRANSACTION, deleteTransaction);
 }

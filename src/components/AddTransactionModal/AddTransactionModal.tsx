@@ -9,7 +9,7 @@ import  { db } from './../../firebase';
 import EXPENSE_TYPES from './../../constants/expenseTypes';
 import INCOME_TYPES from './../../constants/incomeTypes';
 
-import { TransactionInterface } from './../../reducers';
+import { TransactionInterface } from './../../models';
 import { createTransaction, CreateTransactionInterface } from './../../actions/transactions';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -102,7 +102,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
 
     const key = db.ref().child('transactions').push().key;
     const transaction: TransactionInterface = {
-      id: key || undefined,
+      id: key || Math.random().toString(),
       type: this.state.type,
       category: this.state.category,
       date: this.state.date.endOf('day').toDate().getTime(),

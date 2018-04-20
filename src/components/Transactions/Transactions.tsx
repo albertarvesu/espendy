@@ -2,12 +2,10 @@ import * as React from 'react';
 import * as Currency from 'react-currency-formatter';
 import * as moment from 'moment';
 
-import { TransactionInterface } from '../../reducers';
+import { TransactionInterface } from '../../models';
 
 import EXPENSE_TYPES from './../../constants/expenseTypes';
 import INCOME_TYPES from './../../constants/incomeTypes';
-
-import './Transactions.css';
 
 const Clipboards = require('./../../images/clipboards.svg');
 
@@ -38,7 +36,7 @@ export class Transactions extends React.Component<TransactionsProps> {
               </tr>
               {transactions.slice(0, MAX_DISPLAY).map(transaction => (
                 <tr key={transaction.id} className="tr-row">
-                  <td className="td-date">{moment(transaction.date).format('l')}</td>
+                  <td className="td-date">{moment(transaction.date).format('MMDDYY')}</td>
                   <td className="td-category">
                     {transaction.type === 'expenses' ? (
                       <span className="category" title={EXPENSE_TYPES[transaction.category]}>
@@ -64,7 +62,7 @@ export class Transactions extends React.Component<TransactionsProps> {
         </div>
         {transactions.length > MAX_DISPLAY && (
           <div className="footer">
-            <a href="/home" className="link">
+            <a href="/home/transactions" className="link">
               View All Transactions ({transactions.length})
             </a>
           </div>
