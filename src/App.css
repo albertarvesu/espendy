@@ -203,14 +203,11 @@ select {
 }
 
 .transactions .lists {
-  height: 18rem;
-  overflow-y: auto;
-  overflow-x: hidden;
   display: table;
 }
 
 .transactions .lists td {
-  font-size: 0.825rem;
+  font-size: 1rem;
   opacity: 0.75;
 }
 
@@ -241,6 +238,33 @@ select {
 
 .transactions .footer {
   text-align: center;
+}
+
+.transactions.modal tbody {
+  height: 18rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+}
+
+.transactions.modal .td-date {
+  width: 20%;
+}
+
+.transactions.modal .td-category {
+  width: 20%;
+}
+
+.transactions.modal .td-remarks {
+  width: 25%;
+}
+
+.transactions.modal .td-amount {
+  width: 20%;
+}
+
+.transactions.modal .td-actions {
+  width: 20%;
 }
 
 .transactions .action-icon {

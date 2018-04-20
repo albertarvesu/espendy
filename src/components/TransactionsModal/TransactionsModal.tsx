@@ -24,6 +24,17 @@ interface TransactionsModalProps {
 }
 
 export class TransactionsModal extends React.Component<TransactionsModalProps> {
+  constructor(props: TransactionsModalProps) {
+    super(props);
+    this.onDelete = this.onDelete.bind(this);
+  }
+
+  onDelete(transaction: TransactionInterface) {
+    if (confirm('Are you sure you want to delete this transaction?')) {
+      this.props.deleteTransaction(transaction);
+    }
+  }
+
   render () {
     const { transactions, settings } = this.props;
     return (
@@ -78,7 +89,7 @@ export class TransactionsModal extends React.Component<TransactionsModalProps> {
                       className="action-button"
                       title="Delete"
                       onClick={() => {
-                        this.props.deleteTransaction(transaction);
+                        this.onDelete(transaction);
                       }}
                     >
                       <img src={TrashIcon} alt="Delete" className="action-icon edit" />
