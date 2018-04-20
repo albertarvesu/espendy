@@ -162,7 +162,6 @@ export class Home extends React.Component<HomeProps> {
             </div>
             {/* <div className="sidebox ads" /> */}
           </div>
-
         </div>
       </div>
     );

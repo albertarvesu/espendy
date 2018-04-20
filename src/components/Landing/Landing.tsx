@@ -16,11 +16,13 @@ import { signIn, SignInInterface } from './../../actions/auth';
 
 import './Landing.css';
 import { AppStateInterface, AuthStateInterface } from '../../models';
+import Footer from '../Footer/Footer';
 
 interface Props {
   hasError: boolean;
   error?: string;
   isLoggingIn?: boolean;
+  isLoggedIn?: boolean;
   signIn: SignInInterface;
   history?: any;
 }
@@ -30,6 +32,12 @@ export class Landing extends React.Component<Props> {
     super(props);
     this.onFacebooksignIn = this.onFacebooksignIn.bind(this);
     this.onGooglesignIn = this.onGooglesignIn.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.isLoggedIn && this.props.isLoggedIn !== nextProps.isLoggedIn) {
+      this.props.history.push('/home');
+    }
   }
 
   componentDidMount() {
@@ -70,6 +78,7 @@ export class Landing extends React.Component<Props> {
             </button>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
