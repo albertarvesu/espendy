@@ -21,7 +21,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename={`/espendy`}>
           <div>
             <ModalRoute
               component={SettingsModal}
