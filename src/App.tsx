@@ -11,6 +11,7 @@ import SignOut from './components/SignOut/SignOut';
 import AddTransactionModal from './components/AddTransactionModal/AddTransactionModal';
 import SettingsModal from './components/SettingsModal/SettingsModal';
 import TransactionsModal from './components/TransactionsModal/TransactionsModal';
+import Privacy from './components/Privacy/Privacy';
 
 import 'react-router-modal/css/react-router-modal.css';
 import './App.css';
@@ -41,6 +42,7 @@ class App extends React.Component {
             <ModalContainer containerClassName="modal-container" />
             <Switch>
               <Route exact={true} path="/" component={Landing} />
+              <Route path="/privacy" component={Privacy} />
               <Route path="/home" component={Home} />
               <Route path="/signout" component={SignOut} />
               <Redirect to="/" push={true} />

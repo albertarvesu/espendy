@@ -21,8 +21,8 @@ describe('Testing <App />', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.find(Switch).length).toEqual(1);
   });
-  it('renders 3 <Route />', () => {
+  it('renders 4 <Route />', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.find(Route).length).toEqual(3);
+    expect(wrapper.find(Route).length).toEqual(4);
   });
 });
