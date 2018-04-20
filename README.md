@@ -21,9 +21,14 @@ Travis CI
 Codecov
 ```
 
+# Screenshots
+
+
 # Running build
 `yarn build`
 
 # Running Test
-`yarn test` - Run tests
-`yarn test:coverage` - Run tests with coverage
+```
+yarn test
+yarn test:coverage
+```
