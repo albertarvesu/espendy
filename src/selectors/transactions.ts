@@ -5,15 +5,29 @@ import { AppStateInterface, TransactionInterface } from './../models';
 export const selectTransactions = (state: AppStateInterface) =>
   get(state, 'transactions', {});
 
-export const selectAllTransactions = (state: AppStateInterface): Array<TransactionInterface> => {
+export const selectAllTransactions = (
+  state: AppStateInterface,
+  from: moment.Moment = moment().startOf('month'),
+  to: moment.Moment = moment(),
+): Array<TransactionInterface> => {
   const transactions = get(selectTransactions(state), 'data', []);
   return Object.keys(transactions).map(key => transactions[key])
-        .concat()
-        .sort((a, b) => b.date - a.date);
+          .filter((transaction: TransactionInterface) => {
+            if (transaction.date) {
+              return transaction.date >= from.valueOf() && transaction.date <= to.valueOf();
+            }
+            return false;
+          })
+          .concat()
+          .sort((a, b) => b.date - a.date);
 };
 
-export const selectExpensesTransactions = (state: AppStateInterface): Array<TransactionInterface> => {
-  const transactions = selectAllTransactions(state);
+export const selectExpensesTransactions = (
+  state: AppStateInterface,
+  from: moment.Moment = moment().startOf('month'),
+  to: moment.Moment = moment(),
+): Array<TransactionInterface> => {
+  const transactions = selectAllTransactions(state, from, to);
   return transactions.filter(transaction => transaction.type === 'expenses');
 };
 
@@ -59,8 +73,12 @@ export const selectExpensesTransactionsByDate = (
   return calcuateByDate(grouped, format, from, to);
 };
 
-export const selectIncomeTransactions = (state: AppStateInterface): Array<TransactionInterface> => {
-  const transactions = selectAllTransactions(state);
+export const selectIncomeTransactions = (
+  state: AppStateInterface,
+  from: moment.Moment = moment().startOf('month'),
+  to: moment.Moment = moment(),
+): Array<TransactionInterface> => {
+  const transactions = selectAllTransactions(state, from, to);
   return transactions.filter(transaction => transaction.type === 'income');
 };
 
