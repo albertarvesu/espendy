@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter basename={`/espendy`}>
+        <BrowserRouter>
           <Routes />
         </BrowserRouter>
       </Provider>
