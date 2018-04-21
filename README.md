@@ -4,7 +4,7 @@
 
 A simple expenses tracker web application built on top of the following technologies:
 
-Jump straight to the [Demo](https://albertarvesu.github.io/espendy/)
+Jump straight to the [app](https://espendy.com)
 
 # Technologies/Used
 ```
