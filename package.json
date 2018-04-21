@@ -2,6 +2,7 @@
   "name": "espendy",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://espendy.com",
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "@types/enzyme": "^3.1.9",
@@ -40,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
+    "build": "react-scripts-ts build && cp _redirects build/",
     "test": "react-scripts-ts test --env=jsdom",
     "test:coverage": "react-scripts-ts test --env=jsdom --coverage --collectCoverageFrom=src/**/*.{ts,tsx} --collectCoverageFrom=!src/*.{ts,tsx}",
     "eject": "react-scripts-ts eject"

@@ -61,13 +61,11 @@ export class Transactions extends React.Component<TransactionsProps> {
             </tbody>
           </table>
         </div>
-        {transactions.length > MAX_DISPLAY && (
-          <div className="footer">
-            <Link to="/home/transactions" className="link">
-              View All Transactions ({transactions.length})
-            </Link>
-          </div>
-        )}
+        <div className="footer">
+          <Link to="/home/transactions" className="link">
+            View All Transactions ({transactions.length})
+          </Link>
+        </div>
       </React.Fragment>
     );
   }
