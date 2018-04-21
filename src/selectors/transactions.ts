@@ -7,8 +7,8 @@ export const selectTransactions = (state: AppStateInterface) =>
 
 export const selectAllTransactions = (
   state: AppStateInterface,
-  from: moment.Moment = moment().startOf('month'),
-  to: moment.Moment = moment(),
+  from: moment.Moment = moment().startOf('month').startOf('day'),
+  to: moment.Moment = moment().endOf('day'),
 ): Array<TransactionInterface> => {
   const transactions = get(selectTransactions(state), 'data', []);
   return Object.keys(transactions).map(key => transactions[key])
@@ -24,8 +24,8 @@ export const selectAllTransactions = (
 
 export const selectExpensesTransactions = (
   state: AppStateInterface,
-  from: moment.Moment = moment().startOf('month'),
-  to: moment.Moment = moment(),
+  from: moment.Moment = moment().startOf('month').startOf('day'),
+  to: moment.Moment = moment().endOf('day'),
 ): Array<TransactionInterface> => {
   const transactions = selectAllTransactions(state, from, to);
   return transactions.filter(transaction => transaction.type === 'expenses');
@@ -34,8 +34,8 @@ export const selectExpensesTransactions = (
 const calcuateByDate = (
   grouped: Dictionary<TransactionInterface[]>,
   format: string,
-  from: moment.Moment = moment().startOf('month'),
-  to: moment.Moment = moment(),
+  from: moment.Moment = moment().startOf('month').startOf('day'),
+  to: moment.Moment = moment().endOf('day'),
 ): object => {
   if (isEmpty(grouped)) {
     return grouped;
@@ -65,8 +65,8 @@ const calcuateByDate = (
 export const selectExpensesTransactionsByDate = (
   state: AppStateInterface,
   format: string = 'MMM DD',
-  from: moment.Moment = moment().startOf('month'),
-  to: moment.Moment = moment(),
+  from: moment.Moment = moment().startOf('month').startOf('day'),
+  to: moment.Moment = moment().endOf('day'),
 ): object => {
   const expenses = selectExpensesTransactions(state).reverse();
   const grouped = groupBy(expenses, expense => moment(expense.date).startOf('day').format());
@@ -85,8 +85,8 @@ export const selectIncomeTransactions = (
 export const selectIncomeTransactionsByDate = (
   state: AppStateInterface,
   format: string = 'MMM DD',
-  from: moment.Moment = moment().startOf('month'),
-  to: moment.Moment = moment(),
+  from: moment.Moment = moment().startOf('month').startOf('day'),
+  to: moment.Moment = moment().endOf('day'),
 ): object => {
   const incomes = selectIncomeTransactions(state).reverse();
   const grouped = groupBy(incomes, income => moment(income.date).startOf('day').format());

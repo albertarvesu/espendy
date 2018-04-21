@@ -170,8 +170,8 @@ export class Home extends React.Component<HomeProps> {
 
 const mapStateToProps = (state: AppStateInterface) => {
   const settings: SettingsInterface = selectUserSettings(state);
-  const from = settings.from ? moment(settings.from) : undefined;
-  const to = settings.to ? moment(settings.to) : undefined;
+  const from = settings.from ? moment(settings.from).startOf('day') : undefined;
+  const to = settings.to ? moment(settings.to).endOf('day') : undefined;
   return {
     currentUser: selectCurrentUser(state),
     settings,
