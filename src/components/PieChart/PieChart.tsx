@@ -1,14 +1,23 @@
 import * as React from 'react';
 import { get } from 'lodash';
-import { VictoryPie } from 'victory';
+import { VictoryPie, VictoryLegend } from 'victory';
 import { TransactionInterface } from '../../models';
-
+import EXPENSE_TYPES from './../../constants/expenseTypes';
 import './PieChart.css';
 
 interface PieChartProps {
   expenses: Array<TransactionInterface>;
   totalExpenses: number;
 }
+
+const COLOR_SCALE = [
+  '#a4c400',
+  '#1ba1e2',
+  '#f472d0',
+  '#825a2c',
+  '#76608a',
+  '#795548',
+];
 
 const toPercent = (amount: number, total: number): number => ((amount / total) * 100);
 
@@ -25,9 +34,28 @@ class PieChart extends React.Component<PieChartProps> {
       y: toPercent(rawData[code], this.props.totalExpenses),
       x: code.toUpperCase(),
     }));
+    const legendData = Object.keys(rawData).reduce(
+      (acc, curr, index) => {
+        return [
+          ...acc,
+          {
+            name: EXPENSE_TYPES[curr],
+            symbol: { fill: COLOR_SCALE[index] }
+          }
+        ];
+      },
+      []
+    );
     return (
       <React.Fragment>
-        <div className="legend">Expenses Allocation</div>
+        <VictoryLegend
+          width={750}
+          height={20}
+          orientation="horizontal"
+          gutter={50}
+          standalone={true}
+          data={legendData}
+        />
         <VictoryPie
           animate={{
             duration: 1000,
@@ -38,22 +66,16 @@ class PieChart extends React.Component<PieChartProps> {
             }
           }}
           innerRadius={60}
-          colorScale={[
-            '#a4c400',
-            '#1ba1e2',
-            '#f472d0',
-            '#825a2c',
-            '#76608a',
-            '#795548',
-          ]}
+          colorScale={COLOR_SCALE}
           labelRadius={90}
-          labels={(d) => `${d.x} ${Math.round(d.y)}%`}
+          labels={(d) => `${Math.round(d.y)}%`}
           data={expenses}
           style={{
             data: { stroke: 'white', strokeWidth: 1 },
-            labels: { fill: 'white', fontSize: 10 }
+            labels: { fill: 'white', fontSize: 8 }
           }}
         />
+        <div className="legend">Expenses Allocation</div>
       </React.Fragment>
     );
   }

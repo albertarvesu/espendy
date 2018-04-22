@@ -51,18 +51,21 @@ describe('Testing Reducer Transactions', () => {
       '-LAHwbDeLX5lUILEocrq': {
         id: '-LAHwbDeLX5lUILEocrq',
         amount: 5600,
+        isFixed: false,
         category: 'sal',
         type: 'income'
       },
       '-LAHwbDeLX5lUILEocrqt': {
         id: '-LAHwbDeLX5lUILEocrqt',
         amount: 250,
+        isFixed: false,
         category: 'sal',
         type: 'income'
       },
       '-LAHwmea40e1USxfCJZe': {
         id: '-LAHwbDeLX5lUILEocrqt',
         amount: 2000,
+        isFixed: false,
         category: 'hrm',
         type: 'expenses'
       }

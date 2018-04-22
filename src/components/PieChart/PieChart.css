@@ -2,5 +2,6 @@
   position: absolute;
   text-align: center;
   width: 100%;
-  top: 2rem;
+  bottom: 2rem;
+  font-size: 1.25rem;
 }

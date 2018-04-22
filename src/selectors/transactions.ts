@@ -31,7 +31,7 @@ export const selectExpensesTransactions = (
   return transactions.filter(transaction => transaction.type === 'expenses');
 };
 
-const calcuateByDate = (
+export const calcuateByDate = (
   grouped: Dictionary<TransactionInterface[]>,
   format: string,
   from: moment.Moment = moment().startOf('month').startOf('day'),
