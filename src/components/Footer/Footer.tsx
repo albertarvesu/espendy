@@ -5,7 +5,7 @@ import './Footer.css';
 const Footer = () => (
   <div className="bfooter">
     <a
-      href="https://termsfeed.com/privacy-policy/ce0d7f328c60e07f9a7843c5446f457e"
+      href="https://termsfeed.com/privacy-policy/40603b02b60a0ddf79c57077d842e2bb"
       target="_blank"
     >
         Privacy Policy
