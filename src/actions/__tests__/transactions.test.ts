@@ -9,6 +9,7 @@ describe('Testing transactions actions', () => {
   it('should dispatch proper action upon createTransaction', () => {
     const transaction: TransactionInterface = {
       id: '1',
+      isFixed: false,
       amount: 0,
       category: 'abc',
       type: 'income',

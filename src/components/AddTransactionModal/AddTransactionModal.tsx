@@ -9,11 +9,10 @@ import  { db } from './../../firebase';
 import EXPENSE_TYPES from './../../constants/expenseTypes';
 import INCOME_TYPES from './../../constants/incomeTypes';
 
-import { TransactionInterface } from './../../models';
+import { TransactionInterface, ScheduleEnum } from './../../models';
 import { createTransaction, CreateTransactionInterface } from './../../actions/transactions';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import './AddTransactionModal.css';
 
 interface CategoryProps {
   className?: string;
@@ -41,6 +40,8 @@ interface ModalState {
   hasError: boolean;
   errorMessage: string;
   type: string;
+  isFixed: boolean;
+  schedule: ScheduleEnum;
   date: moment.Moment;
   category: string;
   amount: string;
@@ -54,41 +55,27 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
       hasError: false,
       errorMessage: '',
       type: 'expenses',
+      isFixed: false,
+      schedule: ScheduleEnum.Monthly,
       date: moment(),
       category: Object.keys(EXPENSE_TYPES)[0],
       amount: '',
       remarks: ''
     };
     this.onChangeType = this.onChangeType.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.onChangeCategory = this.onChangeCategory.bind(this);
-    this.onChangeAmount = this.onChangeAmount.bind(this);
-    this.onChangeRemarks = this.onChangeRemarks.bind(this);
     this.onSaveTransaction = this.onSaveTransaction.bind(this);
   }
 
   onChangeType(event: React.ChangeEvent<HTMLSelectElement>) {
     this.setState({ type: event.target.value }, () => {
-      const categoryTypes =
-        this.state.type === 'expenses' ? EXPENSE_TYPES : INCOME_TYPES;
-      this.setState({ category: Object.keys(categoryTypes)[0] });
+      const isExpenses = this.state.type === 'expenses';
+      const categoryTypes = isExpenses ? EXPENSE_TYPES : INCOME_TYPES;
+      this.setState({
+        category: Object.keys(categoryTypes)[0],
+        isFixed: !isExpenses ? false : this.state.isFixed,
+        schedule: !isExpenses ? ScheduleEnum.Monthly : this.state.schedule,
+      });
     });
-  }
-
-  onChangeDate(date: moment.Moment) {
-    this.setState({ date });
-  }
-
-  onChangeCategory(event: React.ChangeEvent<HTMLSelectElement>) {
-    this.setState({ category: event.target.value });
-  }
-
-  onChangeAmount(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ amount: event.target.value });
-  }
-
-  onChangeRemarks(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    this.setState({ remarks: event.target.value });
   }
 
   onSaveTransaction() {
@@ -105,6 +92,8 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
       id: key || Math.random().toString(),
       type: this.state.type,
       category: this.state.category,
+      isFixed: this.state.isFixed,
+      schedule: this.state.schedule,
       date: this.state.date.endOf('day').toDate().getTime(),
       amount: parseFloat(this.state.amount),
       remarks: this.state.remarks,
@@ -124,13 +113,42 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
           <option value="expenses">Expenses</option>
           <option value="income">Income</option>
         </select>
+        {this.state.type === 'expenses' && (
+          <React.Fragment>
+            <div className="cb-wrap">
+              <h4 title="Type of expenses being paid a scheduled manner">Fixed?</h4>
+              <input
+                type="checkbox"
+                className="modal-input"
+                checked={this.state.isFixed}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  this.setState({ isFixed: event.target.checked });
+                }}
+              />
+            </div>
+            {this.state.isFixed && (
+              <select
+                defaultValue={this.state.schedule}
+                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                  this.setState({ schedule: ScheduleEnum[event.target.value] });
+                }}
+              >
+                {Object.keys(ScheduleEnum).map(schedule => (
+                  <option key={schedule.valueOf()} value={schedule.valueOf()}>{schedule.valueOf()}</option>
+                ))}
+              </select>
+            )}
+          </React.Fragment>
+        )}
         <h4>Category</h4>
         {this.state.type === 'expenses' && (
           <CategoryTypes
             autoFocus={true}
             className="expense-types"
             types={EXPENSE_TYPES}
-            onChange={this.onChangeCategory}
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+              this.setState({ category: event.target.value });
+            }}
           />
         )}
         {this.state.type === 'income' && (
@@ -138,7 +156,9 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
             autoFocus={false}
             className="income-types"
             types={INCOME_TYPES}
-            onChange={this.onChangeCategory}
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+              this.setState({ category: event.target.value });
+            }}
           />
         )}
         <h4>Date</h4>
@@ -147,23 +167,29 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
           selected={this.state.date}
           maxDate={moment()}
           className="modal-input"
-          onChange={this.onChangeDate}
+          onChange={(date: moment.Moment) => {
+            this.setState({ date });
+          }}
           readOnly={true}
         />
         <h4>Amount</h4>
         <input
           type="number"
           placeholder="0.00"
-          className="modal-input"
+          className="modal-input amount"
           value={this.state.amount}
-          onChange={this.onChangeAmount}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            this.setState({ amount: event.target.value });
+          }}
         />
         <h4>Remarks</h4>
         <textarea
           className="modal-input-textarea"
-          placeholder="January bill payment"
+          placeholder="Bills payment for month of Jan"
           value={this.state.remarks}
-          onChange={this.onChangeRemarks}
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+            this.setState({ remarks: event.target.value });
+          }}
         />
         <div className="actions right">
           <button className="button primary" onClick={this.onSaveTransaction}>

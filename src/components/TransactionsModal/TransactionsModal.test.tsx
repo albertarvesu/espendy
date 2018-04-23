@@ -16,8 +16,10 @@ const settings: SettingsInterface = {
 
 describe('Testing <TransactionsModal />', () => {
   it('renders the element', () => {
-    // tslint:disable-next-line:no-empty
-    const wrapper = shallow(<TransactionsModal transactions={[]} settings={settings} deleteTransaction={() => {}} />);
+    const wrapper = shallow(
+          // tslint:disable-next-line:no-empty
+      <TransactionsModal transactions={[]} settings={settings} incomes={[]} expenses={[]} deleteTransaction={() => {}} />
+    );
     expect(wrapper.type()).toEqual('div');
   });
   it('renders transactions correctly', () => {
@@ -39,7 +41,7 @@ describe('Testing <TransactionsModal />', () => {
     ];
     const wrapper = shallow(
       // tslint:disable-next-line:no-empty
-      <TransactionsModal transactions={transactions} settings={settings} deleteTransaction={() => {}} />
+      <TransactionsModal transactions={transactions} settings={settings} incomes={[]} expenses={[]} deleteTransaction={() => {}} />
     );
     expect(wrapper.find('.lists tr').length).toEqual(3);
     expect(wrapper.find('.category').length).toEqual(2);

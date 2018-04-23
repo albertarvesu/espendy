@@ -26,9 +26,9 @@ describe('Testing <AddTransactionModal />', () => {
   it('renders correct amount', () => {
     // tslint:disable-next-line:no-empty
     const wrapper = shallow(<AddTransactionModal createTransaction={() => {}} />);
-    expect(wrapper.find('input.modal-input').props().value).toEqual('');
+    expect(wrapper.find('input.amount').props().value).toEqual('');
     wrapper.setState({ amount: '1000' });
-    expect(wrapper.find('input.modal-input').props().value).toEqual('1000');
+    expect(wrapper.find('input.amount').props().value).toEqual('1000');
   });
   it('renders correct remarks', () => {
     // tslint:disable-next-line:no-empty

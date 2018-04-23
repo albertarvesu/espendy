@@ -11,6 +11,8 @@ import AddTransaction from './../AddTransaction/AddTransaction';
 import Transactions from './../Transactions/Transactions';
 import LineChart from './../LineChart/LineChart';
 import PieChart from './../PieChart/PieChart';
+import Insigths from './../Insights/Insigths';
+import FixedExpenses from './../FixedExpenses/FixedExpenses';
 
 import { getTransactions, GetTransactionsInterface } from './../../actions/transactions';
 import { AppStateInterface, UserInterface, TransactionInterface, SettingsInterface } from '../../models';
@@ -30,7 +32,6 @@ import './Home.css';
 const MAX_DOCUMENT_WIDTH = 700;
 
 const SettingsIcon = require('./../../images/settings.svg');
-const SignoutIcon = require('./../../images/power-button.svg');
 
 interface HomeProps {
   currentUser: UserInterface;
@@ -102,6 +103,7 @@ export class Home extends React.Component<HomeProps> {
             {(!isEmpty(this.props.expensesByDate) || !isEmpty(this.props.incomesByDate)) && (
               <Box clazz="chart line">
                 <LineChart
+                  settings={this.props.settings}
                   expensesByDate={this.props.expensesByDate}
                   incomesByDate={this.props.incomesByDate}
                 />
@@ -123,6 +125,10 @@ export class Home extends React.Component<HomeProps> {
               </Box>
             )}
 
+            <Box clazz="box box-td insights tile-link">
+              <Insigths settings={this.props.settings} />
+            </Box>
+
             <Link
               className="box box-td tile-link settings hvr-bounce-to-left"
               to="/home/settings"
@@ -135,17 +141,10 @@ export class Home extends React.Component<HomeProps> {
               </div>
             </Link>
 
-            <Link
-              className="box box-td tile-link sign-out hvr-bounce-to-left"
-              to="/signout"
-            >
-              <div className="lead">
-                <img alt="Signout" className="icon" src={SignoutIcon} />
-              </div>
-              <div className="summary">
-                <p>Sign Out</p>
-              </div>
-            </Link>
+            <Box clazz="box box-td fixed-expenses tile-link">
+              <FixedExpenses settings={this.props.settings} />
+            </Box>
+
           </div>
 
           <div className="sidebar" id="sidebar">
@@ -158,6 +157,7 @@ export class Home extends React.Component<HomeProps> {
               <div className="text">
                 <h5>{currentUser.displayName}</h5>
                 <span>{currentUser.email}</span>
+                <Link to="/signout">Sign Out</Link>
               </div>
             </div>
             {/* <div className="sidebox ads" /> */}

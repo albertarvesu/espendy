@@ -31,7 +31,16 @@ export const selectExpensesTransactions = (
   return transactions.filter(transaction => transaction.type === 'expenses');
 };
 
-const calcuateByDate = (
+export const selectFixedExpenses = (
+  state: AppStateInterface,
+  from: moment.Moment = moment().startOf('month').startOf('day'),
+  to: moment.Moment = moment().endOf('day'),
+): Array<TransactionInterface> => {
+  const expenses = selectExpensesTransactions(state, from, to);
+  return expenses.filter(expense => expense.isFixed);
+};
+
+export const calcuateByDate = (
   grouped: Dictionary<TransactionInterface[]>,
   format: string,
   from: moment.Moment = moment().startOf('month').startOf('day'),
@@ -64,7 +73,7 @@ const calcuateByDate = (
 
 export const selectExpensesTransactionsByDate = (
   state: AppStateInterface,
-  format: string = 'MMM DD',
+  format: string = 'M/DD',
   from: moment.Moment = moment().startOf('month').startOf('day'),
   to: moment.Moment = moment().endOf('day'),
 ): object => {
@@ -76,7 +85,7 @@ export const selectExpensesTransactionsByDate = (
 export const selectIncomeTransactions = (
   state: AppStateInterface,
   from: moment.Moment = moment().startOf('month'),
-  to: moment.Moment = moment(),
+  to: moment.Moment = moment().endOf('day'),
 ): Array<TransactionInterface> => {
   const transactions = selectAllTransactions(state, from, to);
   return transactions.filter(transaction => transaction.type === 'income');
@@ -84,7 +93,7 @@ export const selectIncomeTransactions = (
 
 export const selectIncomeTransactionsByDate = (
   state: AppStateInterface,
-  format: string = 'MMM DD',
+  format: string = 'M/DD',
   from: moment.Moment = moment().startOf('month').startOf('day'),
   to: moment.Moment = moment().endOf('day'),
 ): object => {

@@ -39,7 +39,7 @@ describe('Testing <Home />', () => {
     expect(wrapper.find('.content').length).toEqual(1);
     expect(wrapper.find('.sidebar').length).toEqual(1);
 
-    expect(wrapper.find(Box).length).toEqual(2);
+    expect(wrapper.find(Box).length).toEqual(4);
   });
   it('renders transactions if not empty', () => {
     const wrapper = shallow(
@@ -58,6 +58,6 @@ describe('Testing <Home />', () => {
         incomesByDate={{'2': 2}}
       />
     );
-    expect(wrapper.find(Box).length).toEqual(4);
+    expect(wrapper.find(Box).length).toEqual(6);
   });
 });

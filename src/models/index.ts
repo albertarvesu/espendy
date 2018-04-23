@@ -37,11 +37,20 @@ export interface SettingsStateInteface {
   data?: SettingsInterface;
 }
 
+export enum ScheduleEnum {
+  Daily = 'Daily',
+  Weekly = 'Weekly',
+  Fortnightly = 'Fortnightly',
+  Monthly = 'Monthly'
+}
+
 export interface TransactionInterface {
   id: string;
   type: string;
   category: string;
   amount: number;
+  isFixed: boolean;
+  schedule?: ScheduleEnum;
   date?: number;
   remarks?: string;
 }

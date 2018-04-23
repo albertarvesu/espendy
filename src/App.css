@@ -83,6 +83,16 @@ select {
   color: rgba(0, 0, 0, 0.8);
 }
 
+.modal-content .cb-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.modal-content .cb-wrap > input {
+  margin-top: 0.675rem;
+  width: 10rem;
+}
+
 .modal-content .modal-input {
   font-weight: bold;
   color: rgba(0, 0, 0, 0.8);
@@ -163,11 +173,24 @@ select {
 }
 
 .transactions.modal {
-  min-width: 25rem;  
+  min-width: 25rem;
+  min-height: 28rem;
 }
 
 .transactions.modal > .trans-wrap {
   width: 100%;
+}
+
+.transactions.modal label {
+  font-size: 0.875rem;
+}
+
+.transactions.modal span {
+  margin-right: 1rem;
+}
+
+.transactions.modal input {
+  margin-left: 1rem;
 }
 
 .transactions .lead {

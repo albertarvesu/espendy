@@ -1,0 +1,43 @@
+.fixed-expenses .lead {
+  align-items: flex-start !important;
+  flex-direction: column;
+}
+
+.fixed-expenses .header {
+  display: flex;
+  align-items: center;
+  align-self: center;
+}
+
+.fixed-expenses .icon {
+  height: 2.5rem;
+}
+
+.fixed-expenses h5 {
+  font-size: 1.125rem;
+  margin-left: 1rem;
+}
+
+.fixed-expenses table {
+  display: table;
+  width: 100%;
+}
+
+.fixed-expenses td {
+  font-size: 1rem;
+  opacity: 0.75;
+  text-align: left;
+}
+
+.fixed-expenses td:last-child {
+  text-align: right;
+}
+
+.fixed-expenses .total-fixed {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+  text-align: right;
+  width: 100%;
+  font-size: 1.25rem;
+  margin-top: 0.25rem;
+}

@@ -1,7 +1,7 @@
 const EXPENSE_TYPES = {
   egw: 'Electricity, Gas, Water',
   emf: 'Emergency Fund',
-  hov: 'Holiday / Vaction',
+  hov: 'Holiday / Vacation',
   hrm: 'House Rent / Mortgage',
   int: 'Internet',
   gro: 'Groceries',

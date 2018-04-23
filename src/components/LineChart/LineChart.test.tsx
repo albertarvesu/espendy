@@ -3,11 +3,20 @@ import './../../enzymeAdapter';
 import { shallow } from 'enzyme';
 import LineChart from './LineChart';
 import { VictoryChart, VictoryLegend, VictoryAxis, VictoryLine } from 'victory';
+import { SettingsInterface } from '../../models';
+import * as moment from 'moment';
 
+const settings: SettingsInterface = {
+  from: moment().startOf('month').toDate().getTime(),
+  to: moment().toDate().getTime(),
+  roundingValue: 0,
+  currency: 'USD',
+};
 describe('Testing <LineChart />', () => {
   it('renders the skeletons of element', () => {
     const wrapper = shallow(
       <LineChart
+        settings={settings}
         expensesByDate={{'1': 1}}
         incomesByDate={{'2': 2}}
       />

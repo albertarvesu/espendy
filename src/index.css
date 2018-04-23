@@ -108,3 +108,7 @@ body {
   background: #e74b37;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+

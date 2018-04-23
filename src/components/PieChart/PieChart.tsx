@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { get } from 'lodash';
-import { VictoryPie } from 'victory';
+import { VictoryPie, VictoryLegend } from 'victory';
 import { TransactionInterface } from '../../models';
-
+import EXPENSE_TYPES from './../../constants/expenseTypes';
 import './PieChart.css';
 
 interface PieChartProps {
@@ -10,7 +10,16 @@ interface PieChartProps {
   totalExpenses: number;
 }
 
-const toPercent = (amount: number, total: number): number => ((amount / total) * 100);
+const COLOR_SCALE = [
+  '#a4c400',
+  '#1ba1e2',
+  '#f472d0',
+  '#825a2c',
+  '#76608a',
+  '#795548',
+];
+
+const toPercent = (amount: number, total: number): number => Math.round((amount / total) * 100);
 
 class PieChart extends React.Component<PieChartProps> {
   render () {
@@ -25,9 +34,20 @@ class PieChart extends React.Component<PieChartProps> {
       y: toPercent(rawData[code], this.props.totalExpenses),
       x: code.toUpperCase(),
     }));
+    const legendData = Object.keys(rawData).reduce(
+      (acc, curr, index) => {
+        return [
+          ...acc,
+          {
+            name: `${EXPENSE_TYPES[curr]}  (${toPercent(rawData[curr], this.props.totalExpenses)}%)`,
+            symbol: { fill: COLOR_SCALE[index] }
+          }
+        ];
+      },
+      []
+    );
     return (
       <React.Fragment>
-        <div className="legend">Expenses Allocation</div>
         <VictoryPie
           animate={{
             duration: 1000,
@@ -38,20 +58,25 @@ class PieChart extends React.Component<PieChartProps> {
             }
           }}
           innerRadius={60}
-          colorScale={[
-            '#a4c400',
-            '#1ba1e2',
-            '#f472d0',
-            '#825a2c',
-            '#76608a',
-            '#795548',
-          ]}
+          colorScale={COLOR_SCALE}
           labelRadius={90}
-          labels={(d) => `${d.x} ${Math.round(d.y)}%`}
+          labels={(d) => `${Math.round(d.y)}%`}
           data={expenses}
           style={{
             data: { stroke: 'white', strokeWidth: 1 },
-            labels: { fill: 'white', fontSize: 10 }
+            labels: { fill: 'white', fontSize: 8 }
+          }}
+        />
+        <VictoryLegend
+          width={500}
+          height={125}
+          orientation="vertical"
+          gutter={150}
+          standalone={true}
+          data={legendData}
+          style={{
+            labels: { fill: 'white', fontSize: 12 },
+            parent: { marginLeft: 200, marginTop: -50 },
           }}
         />
       </React.Fragment>
