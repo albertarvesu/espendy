@@ -1,6 +1,9 @@
 import * as React from 'react';
-
+import * as moment from 'moment';
 import { VictoryChart, VictoryAxis, VictoryLine, VictoryLegend } from 'victory';
+import { SettingsInterface } from './../../models';
+
+const DATE_FORMAT = 'MMM DD, YYYY';
 
 const toXY = (byDate: object) =>  Object.keys(byDate).reduce(
   (accum, curr) => {
@@ -16,13 +19,14 @@ const toXY = (byDate: object) =>  Object.keys(byDate).reduce(
 );
 
 interface LineChartProps {
+  settings: SettingsInterface;
   expensesByDate: object;
   incomesByDate: object;
 }
 
 class LineChart extends React.Component<LineChartProps> {
   render () {
-    const { expensesByDate, incomesByDate  } = this.props;
+    const { expensesByDate, incomesByDate, settings } = this.props;
     const expenses = toXY(expensesByDate);
     const incomes = toXY(incomesByDate);
     return (
@@ -42,7 +46,7 @@ class LineChart extends React.Component<LineChartProps> {
             }}
           />
           <VictoryAxis
-            label="Date"
+            label={`${moment(settings.from).format(DATE_FORMAT)} - ${moment(settings.to).format(DATE_FORMAT)}`}
             style={{
               axis: { stroke: 'white' },
               axisLabel: {

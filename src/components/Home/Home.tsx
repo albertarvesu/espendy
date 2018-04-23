@@ -103,6 +103,7 @@ export class Home extends React.Component<HomeProps> {
             {(!isEmpty(this.props.expensesByDate) || !isEmpty(this.props.incomesByDate)) && (
               <Box clazz="chart line">
                 <LineChart
+                  settings={this.props.settings}
                   expensesByDate={this.props.expensesByDate}
                   incomesByDate={this.props.incomesByDate}
                 />
