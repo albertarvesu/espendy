@@ -51,6 +51,14 @@
   background-color: #fa6800;
 }
 
+.insights {
+  background-color: #795548;
+}
+
+.insights .lead h2 {
+  font-size: 1.75rem;
+}
+
 .settings {
   background-color: #0050ef;
 }

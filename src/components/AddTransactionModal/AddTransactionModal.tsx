@@ -112,7 +112,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         {this.state.type === 'expenses' && (
           <React.Fragment>
             <div className="cb-wrap">
-              <h4 title="Type of expenses on a scheduled manner">Fixed Schedule?</h4>
+              <h4 title="Type of expenses on a scheduled manner">Fixed?</h4>
               <input
                 type="checkbox"
                 className="modal-input"

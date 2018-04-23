@@ -19,7 +19,7 @@ const COLOR_SCALE = [
   '#795548',
 ];
 
-const toPercent = (amount: number, total: number): number => ((amount / total) * 100);
+const toPercent = (amount: number, total: number): number => Math.round((amount / total) * 100);
 
 class PieChart extends React.Component<PieChartProps> {
   render () {
@@ -39,7 +39,7 @@ class PieChart extends React.Component<PieChartProps> {
         return [
           ...acc,
           {
-            name: EXPENSE_TYPES[curr],
+            name: `${EXPENSE_TYPES[curr]}  (${toPercent(rawData[curr], this.props.totalExpenses)}%)`,
             symbol: { fill: COLOR_SCALE[index] }
           }
         ];
@@ -48,14 +48,6 @@ class PieChart extends React.Component<PieChartProps> {
     );
     return (
       <React.Fragment>
-        <VictoryLegend
-          width={750}
-          height={20}
-          orientation="horizontal"
-          gutter={50}
-          standalone={true}
-          data={legendData}
-        />
         <VictoryPie
           animate={{
             duration: 1000,
@@ -75,7 +67,17 @@ class PieChart extends React.Component<PieChartProps> {
             labels: { fill: 'white', fontSize: 8 }
           }}
         />
-        <div className="legend">Expenses Allocation</div>
+        <VictoryLegend
+          width={500}
+          height={125}
+          orientation="vertical"
+          gutter={150}
+          standalone={true}
+          data={legendData}
+          style={{
+            labels: { fill: 'white', fontSize: 12 }
+          }}
+        />
       </React.Fragment>
     );
   }

@@ -37,6 +37,9 @@ class LineChart extends React.Component<LineChartProps> {
               { name: 'Expenses', symbol: { fill: '#FF9800' } },
               { name: 'Income', symbol: { fill: '#3F51B5' } },
             ]}
+            style={{
+              labels: { fill: 'white', fontSize: 12 }
+            }}
           />
           <VictoryAxis
             label="Date"

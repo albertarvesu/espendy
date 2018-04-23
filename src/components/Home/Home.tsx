@@ -11,6 +11,7 @@ import AddTransaction from './../AddTransaction/AddTransaction';
 import Transactions from './../Transactions/Transactions';
 import LineChart from './../LineChart/LineChart';
 import PieChart from './../PieChart/PieChart';
+import Insigths from './../Insights/Insigths';
 
 import { getTransactions, GetTransactionsInterface } from './../../actions/transactions';
 import { AppStateInterface, UserInterface, TransactionInterface, SettingsInterface } from '../../models';
@@ -134,6 +135,10 @@ export class Home extends React.Component<HomeProps> {
                 <p>Settings</p>
               </div>
             </Link>
+
+            <Box clazz="box box-td insights tile-link">
+              <Insigths />
+            </Box>
 
             <Link
               className="box box-td tile-link sign-out hvr-bounce-to-left"
