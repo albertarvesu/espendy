@@ -57,7 +57,7 @@ export class Insights extends React.Component<InsightsProps, InsightsState> {
   }
 
   componentWillReceiveProps(nextProps: InsightsProps) {
-    if (this.props.settings !== nextProps.settings) {
+    if (this.props !== nextProps) {
       this.setInsightItems(nextProps.settings);
     }
   }
