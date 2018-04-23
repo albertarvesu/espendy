@@ -58,25 +58,32 @@ export class Insights extends React.Component<InsightsProps, InsightsState> {
 
   componentWillReceiveProps(nextProps: InsightsProps) {
     if (this.props !== nextProps) {
-      this.setInsightItems(nextProps.settings);
+      this.setInsightItems(nextProps);
     }
   }
 
   componentDidMount() {
-    this.setInsightItems(this.props.settings);
+    this.setInsightItems(this.props);
   }
 
   componentWillUnmount() {
     clearInterval(this.state.timerId);
   }
 
-  setInsightItems(settings: SettingsInterface) {
+  setInsightItems(props: InsightsProps) {
     clearInterval(this.state.timerId);
+    const {
+      settings,
+      monthTotalExpenses,
+      weekTotalExpenses,
+      monthTotalIncome,
+      weekTotalIncome,
+    } = props;
     const items = [
-      <InsightsItem key={0} value={this.props.monthTotalExpenses} currency={settings.currency} byLine={`Your total expenses for ${moment().format('MMMM YYYY')}`} />,
-      <InsightsItem key={1} value={this.props.weekTotalExpenses} currency={settings.currency} byLine="Your total expenses for this week" />,
-      <InsightsItem key={2} value={this.props.monthTotalIncome} currency={settings.currency} byLine={`Your total income for ${moment().format('MMMM YYYY')}`} />,
-      <InsightsItem key={3} value={this.props.weekTotalIncome} currency={settings.currency} byLine="Your total income for this week" />,
+      <InsightsItem key={0} value={monthTotalExpenses} currency={settings.currency} byLine={`Your total expenses for ${moment().format('MMMM YYYY')}`} />,
+      <InsightsItem key={1} value={weekTotalExpenses} currency={settings.currency} byLine="Your total expenses for this week" />,
+      <InsightsItem key={2} value={monthTotalIncome} currency={settings.currency} byLine={`Your total income for ${moment().format('MMMM YYYY')}`} />,
+      <InsightsItem key={3} value={weekTotalIncome} currency={settings.currency} byLine="Your total income for this week" />,
     ];
 
     if (items.length > 0) {

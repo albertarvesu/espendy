@@ -15,7 +15,6 @@ const PinIcon = require('./../../images/pin.svg');
 interface FixedExpensesProps {
   settings: SettingsInterface;
   fixedExpenses: Array<TransactionInterface>;
-  totalFixedExpenses: number;
 }
 
 export class FixedExpenses extends React.Component<FixedExpensesProps> {
@@ -28,29 +27,24 @@ export class FixedExpenses extends React.Component<FixedExpensesProps> {
             <h5>Fixed Expenses</h5>
           </div>
           {this.props.fixedExpenses.length > 0 && (
-             <React.Fragment>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th>Schedule</th>
-                    <th>Amount</th>
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Schedule</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.props.fixedExpenses.map(fixed => (
+                  <tr key={fixed.id}>
+                    <td>{EXPENSE_TYPES[fixed.category]}</td>
+                    <td className="capitalize">{fixed.schedule}</td>
+                    <td><Currency quantity={fixed.amount} currency={this.props.settings.currency} /></td>
                   </tr>
-                </thead>
-                <tbody>
-                  {this.props.fixedExpenses.map(fixed => (
-                    <tr key={fixed.id}>
-                      <td>{EXPENSE_TYPES[fixed.category]}</td>
-                      <td className="capitalize">{fixed.schedule}</td>
-                      <td><Currency quantity={fixed.amount} currency={this.props.settings.currency} /></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className="total-fixed">
-                <Currency quantity={this.props.totalFixedExpenses} currency={this.props.settings.currency} />
-              </p>
-            </React.Fragment>
+                ))}
+              </tbody>
+            </table>
           )}
           {this.props.fixedExpenses.length === 0 && (
             <span className="nofixed"><i>No fixed expenses to display.</i></span>
@@ -61,13 +55,9 @@ export class FixedExpenses extends React.Component<FixedExpensesProps> {
   }
 }
 
-const mapStateToProps = (state: AppStateInterface) => {
-  const fixedExpenses = selectFixedExpenses(state);
-  return {
-    fixedExpenses,
-    totalFixedExpenses: fixedExpenses.reduce((acc, curr) => curr.amount + acc, 0)
-  };
-};
+const mapStateToProps = (state: AppStateInterface) => ({
+  fixedExpenses: selectFixedExpenses(state)
+});
 
 export default compose(
   connect(mapStateToProps),

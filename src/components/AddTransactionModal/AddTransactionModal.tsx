@@ -68,9 +68,13 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
 
   onChangeType(event: React.ChangeEvent<HTMLSelectElement>) {
     this.setState({ type: event.target.value }, () => {
-      const categoryTypes =
-        this.state.type === 'expenses' ? EXPENSE_TYPES : INCOME_TYPES;
-      this.setState({ category: Object.keys(categoryTypes)[0] });
+      const isExpenses = this.state.type === 'expenses';
+      const categoryTypes = isExpenses ? EXPENSE_TYPES : INCOME_TYPES;
+      this.setState({
+        category: Object.keys(categoryTypes)[0],
+        isFixed: !isExpenses ? false : this.state.isFixed,
+        schedule: !isExpenses ? ScheduleEnum.Monthly : this.state.schedule,
+      });
     });
   }
 
@@ -89,7 +93,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
       type: this.state.type,
       category: this.state.category,
       isFixed: this.state.isFixed,
-      schedule: ScheduleEnum.Monthly,
+      schedule: this.state.schedule,
       date: this.state.date.endOf('day').toDate().getTime(),
       amount: parseFloat(this.state.amount),
       remarks: this.state.remarks,
@@ -112,7 +116,7 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
         {this.state.type === 'expenses' && (
           <React.Fragment>
             <div className="cb-wrap">
-              <h4 title="Type of expenses on a scheduled manner">Fixed?</h4>
+              <h4 title="Type of expenses being paid a scheduled manner">Fixed?</h4>
               <input
                 type="checkbox"
                 className="modal-input"
@@ -124,8 +128,9 @@ export class AddTransactionModal extends React.Component<ModalProps, ModalState>
             </div>
             {this.state.isFixed && (
               <select
+                defaultValue={this.state.schedule}
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                  this.setState({ schedule: event.target.checked });
+                  this.setState({ schedule: ScheduleEnum[event.target.value] });
                 }}
               >
                 {Object.keys(ScheduleEnum).map(schedule => (

@@ -16,7 +16,7 @@ const settings: SettingsInterface = {
 describe('Testing <FixedExpenses />', () => {
   it('renders the element with no fixed expenses', () => {
     const wrapper = shallow(
-      <FixedExpenses settings={settings} fixedExpenses={[]} totalFixedExpenses={0} />
+      <FixedExpenses settings={settings} fixedExpenses={[]} />
     );
     expect(wrapper.type()).toEqual(React.Fragment);
     expect(wrapper.find('.nofixed').length).toEqual(1);
@@ -28,7 +28,7 @@ describe('Testing <FixedExpenses />', () => {
       { type: 'expenses', category: 'hrm', amount: 20 } as TransactionInterface
     ];
     const wrapper = shallow(
-      <FixedExpenses settings={settings} fixedExpenses={fixed} totalFixedExpenses={1} />
+      <FixedExpenses settings={settings} fixedExpenses={fixed} />
     );
     expect(wrapper.type()).toEqual(React.Fragment);
     expect(wrapper.find('table').length).toEqual(1);

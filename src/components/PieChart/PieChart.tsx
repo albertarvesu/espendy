@@ -75,7 +75,8 @@ class PieChart extends React.Component<PieChartProps> {
           standalone={true}
           data={legendData}
           style={{
-            labels: { fill: 'white', fontSize: 12 }
+            labels: { fill: 'white', fontSize: 12 },
+            parent: { marginLeft: 200, marginTop: -50 },
           }}
         />
       </React.Fragment>

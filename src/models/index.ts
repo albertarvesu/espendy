@@ -38,10 +38,10 @@ export interface SettingsStateInteface {
 }
 
 export enum ScheduleEnum {
-  Daily = 'daily',
-  Weekly = 'weekly',
-  Fortnightly = 'fortnightly',
-  Monthly = 'monthly'
+  Daily = 'Daily',
+  Weekly = 'Weekly',
+  Fortnightly = 'Fortnightly',
+  Monthly = 'Monthly'
 }
 
 export interface TransactionInterface {

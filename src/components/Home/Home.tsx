@@ -32,7 +32,6 @@ import './Home.css';
 const MAX_DOCUMENT_WIDTH = 700;
 
 const SettingsIcon = require('./../../images/settings.svg');
-const SignoutIcon = require('./../../images/power-button.svg');
 
 interface HomeProps {
   currentUser: UserInterface;
@@ -145,17 +144,6 @@ export class Home extends React.Component<HomeProps> {
               <FixedExpenses settings={this.props.settings} />
             </Box>
 
-            <Link
-              className="box box-td tile-link sign-out hvr-bounce-to-left"
-              to="/signout"
-            >
-              <div className="lead">
-                <img alt="Signout" className="icon" src={SignoutIcon} />
-              </div>
-              <div className="summary">
-                <p>Sign Out</p>
-              </div>
-            </Link>
           </div>
 
           <div className="sidebar" id="sidebar">
@@ -168,6 +156,7 @@ export class Home extends React.Component<HomeProps> {
               <div className="text">
                 <h5>{currentUser.displayName}</h5>
                 <span>{currentUser.email}</span>
+                <Link to="/signout">Sign Out</Link>
               </div>
             </div>
             {/* <div className="sidebox ads" /> */}
