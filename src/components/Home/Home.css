@@ -55,6 +55,10 @@
   background-color: #795548;
 }
 
+.fixed-expenses {
+  background-color: #03A9F4;
+}
+
 .insights .lead h2 {
   font-size: 1.75rem;
 }
@@ -67,6 +71,9 @@
   background-color: #647687;
 }
 
+.sign-out .lead {
+  align-items: center;
+}
 
 .sidebar {
   flex: 2;

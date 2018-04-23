@@ -12,6 +12,7 @@ import Transactions from './../Transactions/Transactions';
 import LineChart from './../LineChart/LineChart';
 import PieChart from './../PieChart/PieChart';
 import Insigths from './../Insights/Insigths';
+import FixedExpenses from './../FixedExpenses/FixedExpenses';
 
 import { getTransactions, GetTransactionsInterface } from './../../actions/transactions';
 import { AppStateInterface, UserInterface, TransactionInterface, SettingsInterface } from '../../models';
@@ -124,6 +125,10 @@ export class Home extends React.Component<HomeProps> {
               </Box>
             )}
 
+            <Box clazz="box box-td insights tile-link">
+              <Insigths settings={this.props.settings} />
+            </Box>
+
             <Link
               className="box box-td tile-link settings hvr-bounce-to-left"
               to="/home/settings"
@@ -136,8 +141,8 @@ export class Home extends React.Component<HomeProps> {
               </div>
             </Link>
 
-            <Box clazz="box box-td insights tile-link">
-              <Insigths settings={this.props.settings}  />
+            <Box clazz="box box-td fixed-expenses tile-link">
+              <FixedExpenses settings={this.props.settings} />
             </Box>
 
             <Link

@@ -31,6 +31,15 @@ export const selectExpensesTransactions = (
   return transactions.filter(transaction => transaction.type === 'expenses');
 };
 
+export const selectFixedExpenses = (
+  state: AppStateInterface,
+  from: moment.Moment = moment().startOf('month').startOf('day'),
+  to: moment.Moment = moment().endOf('day'),
+): Array<TransactionInterface> => {
+  const expenses = selectExpensesTransactions(state, from, to);
+  return expenses.filter(expense => expense.isFixed);
+};
+
 export const calcuateByDate = (
   grouped: Dictionary<TransactionInterface[]>,
   format: string,

@@ -11,6 +11,7 @@ import {
   selectIncomeTransactionsByDate,
   selectAllTransactions,
   calcuateByDate,
+  selectFixedExpenses,
 } from '../transactions';
 
 const defaultState: AppStateInterface  = {
@@ -111,6 +112,44 @@ describe('Testing Selector Transaction', () => {
     };
     const actual = selectAllTransactions(appState, moment('2018-04-11T04:40:08.013Z'), moment('2018-04-14T04:40:08.013Z'));
     expect(actual).toEqual([]);
+  });
+  it('returns nothing if no transaction within the filtered date', () => {
+    const appState: AppStateInterface  = {
+      transactions: {
+        hasError: false,
+        isFetching: false,
+        isUpdating: false,
+        error: '',
+        data: {
+          '-LAHwbDeLX5lUILEocrq': {
+            id: '-LAHwbDeLX5lUILEocrq',
+            amount: 5600,
+            isFixed: true,
+            category: 'egw',
+            date: new Date('2018-04-18T04:40:08.013Z').getTime(),
+            type: 'expenses'
+          },
+          '-LAHwbDeLX5lUILEocrqt': {
+            id: '-LAHwbDeLX5lUILEocrqt',
+            amount: 250,
+            isFixed: true,
+            category: 'egw',
+            date: new Date('2018-04-15T04:40:08.013Z').getTime(),
+            type: 'expenses'
+          },
+          '-LAHwmea40e1USxfCJZe': {
+            id: '-LAHwmea40e1USxfCJZe',
+            amount: 2000,
+            isFixed: false,
+            category: 'hrm',
+            date: new Date('2018-04-10T04:40:08.013Z').getTime(),
+            type: 'expenses'
+          }
+        },
+      },
+    };
+    const actual = selectFixedExpenses(appState, moment('2018-04-09T04:40:08.013Z'), moment());
+    expect(actual.length).toEqual(2);
   });
   it('retuns empty if passing empty', () => {
     const actual = calcuateByDate({}, 'DD MM', moment(), moment());
