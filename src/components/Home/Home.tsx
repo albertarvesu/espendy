@@ -137,7 +137,7 @@ export class Home extends React.Component<HomeProps> {
             </Link>
 
             <Box clazz="box box-td insights tile-link">
-              <Insigths />
+              <Insigths settings={this.props.settings}  />
             </Box>
 
             <Link
