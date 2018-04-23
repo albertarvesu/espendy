@@ -58,21 +58,20 @@ export class Insights extends React.Component<InsightsProps, InsightsState> {
 
   componentWillReceiveProps(nextProps: InsightsProps) {
     if (this.props.settings !== nextProps.settings) {
-      this.setInsightItems(nextProps);
+      this.setInsightItems(nextProps.settings);
     }
   }
 
   componentDidMount() {
-    this.setInsightItems(this.props);
+    this.setInsightItems(this.props.settings);
   }
 
   componentWillUnmount() {
     clearInterval(this.state.timerId);
   }
 
-  setInsightItems(props: InsightsProps) {
+  setInsightItems(settings: SettingsInterface) {
     clearInterval(this.state.timerId);
-    const { settings } = props;
     const items = [
       <InsightsItem key={0} value={this.props.monthTotalExpenses} currency={settings.currency} byLine={`Your total expenses for ${moment().format('MMMM YYYY')}`} />,
       <InsightsItem key={1} value={this.props.weekTotalExpenses} currency={settings.currency} byLine="Your total expenses for this week" />,
